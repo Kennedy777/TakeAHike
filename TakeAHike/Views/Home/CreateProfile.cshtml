@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+@{
+  var user = Model["user"];
+}
+<div class="container">
+
+  <form action="/user/update" method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <div class= "form-group">
+      <label for="userName">User Name</label>
+      <input class = "form-control" type="text" name="user.Name" value =@user.UserName>
+      <label for="password">Password</label>
+      <input class = "form-control" type="password" name="user-password" value = "@user.Password">
+    </div>
+    <div class= "form-group">
+      <label for="firstName">First Name</label>
+      <input class = "form-control" type="text" name="first-name===" value = "@user.FirstName" required>
+      <label for="lastName">Last Name</label>
+      <input class = "form-control" type="text" name="lastNane" value = "@user.LastName" required>
+    </div>
+    <div class= "form-group">
+      <label for="zip">Zip Code</label>
+      <input class = "form-control" type="text" name="zip" value = "@user.ZipCode">
+
+      <label for="phone-number">Phone Number</label>
+      <input class = "form-control" type="text" name="phone-number" value = "@user.PhoneNumber">
+      
+      <label for="email">E-mail</label>
+      <input class = "form-control" type="text" name="email" value = "@user.Email">
+    </div>
+
+    <div class= "form-group">
+      <label for="tag-line">Tag-line</label>
+      <input class = "form-control" type="text" name="tag-line" value = "@user.TagLine">
+    </div>
+
+    <div class= "form-group">
+      <label for="gender">What is your gender identity?</label>
+      <select name="gender">
+        <option value="0">Select</option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+        <option value="3">Other </option>
+
+      </select>
+    </div>
+
+    <div class= "form-group">
+      <label for="car">Can you provide transportation?</label>
+      <select name="transportation ">
+        <option value="0">Select</option>
+        <option value="1">Yes</option>
+        <option value="2">No</option>
+        <option value="3">Sometimes </option>
+
+      </select>
+    </div>
+
+
+    
+
+    @if(Model["message"] == "Edit profile")
+    {
+      <button type="submit" class="btn btn-info">Update Profile</button>
+    }
+    @if(Model["message"] == "Create new profile")
+    {
+      <button type="submit" class="btn btn-info">Create</button>
+    }
+  </form>
+  <button id = "delete" class="btn btn-danger" type="button" name="delete">Delete Profile</button>
+  <form class="hidden-button" action="/user/delete" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit" class="btn btn-danger">Confirm</button>
+  </form>
+  <button class="hidden-button btn btn-info" type="button" name="button"><a href="/user/delete/cancel">Cancel</a></button>
+
+
+</div>
