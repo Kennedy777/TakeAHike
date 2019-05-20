@@ -22,7 +22,6 @@ namespace TakeAHike.Models
     {
       return _name;
     }
-
     public void SetName(string newName)
     {
       _name = newName;
@@ -32,7 +31,6 @@ namespace TakeAHike.Models
     {
       return _difficulty;
     }
-
     public void SetDifficulty( int newDifficulty)
     {
       _difficulty = newDifficulty;
@@ -42,14 +40,15 @@ namespace TakeAHike.Models
     {
       return _distance;
     }
-
     public void SetDistance(float newDistance)
     {
       _distance = newDistance;
     }
 
-
-
+    public int GetId()
+    {
+      return _id;
+    }
 
   }
 }
