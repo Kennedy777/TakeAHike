@@ -7,6 +7,10 @@ namespace TakeAHike.Controllers
 {
   public class TrailsController : Controller
   {
-
+    [Route("/trails")]
+    public ActionResult Index()
+    {
+      return View();
+    }
   }
 }

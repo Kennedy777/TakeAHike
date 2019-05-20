@@ -1,0 +1,12 @@
+/* .container_body {
+  position: fixed;
+  top: 20%;
+} */
+
+body {
+  margin-bottom: 900px;
+  background-image: url("/img/trail2.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+}

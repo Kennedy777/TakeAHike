@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 
 namespace TakeAHike.Models
 {
-  public class Hike
+  public class Trail
   {
     private string _name;
     private int _id;
@@ -14,7 +14,7 @@ namespace TakeAHike.Models
     private bool _wildlife;
     private bool _dogs;
 
-    public Client (string name, int difficulty, float distance, bool waterfalls, bool summits, bool wildlife, bool dogs, int id = 0)
+    public Trail (string name, int difficulty, float distance, bool waterfalls, bool summits, bool wildlife, bool dogs, int id = 0)
     {
       _name = name;
       _id = id;

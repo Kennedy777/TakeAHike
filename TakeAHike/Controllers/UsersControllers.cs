@@ -7,6 +7,10 @@ namespace TakeAHike.Controllers
 {
   public class UsersController : Controller
   {
-
+    [Route("/users")]
+    public ActionResult Index()
+    {
+      return View();
+    }
   }
 }
