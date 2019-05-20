@@ -8,15 +8,15 @@ namespace TakeAHike.Tests
   [TestClass]
   public class FeatureTest : IDisposable
   {
-    public CTest()
+    public FeatureTest()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=kevin_garvey_test;";
     }
 
-    public void Dispose()
-    {
-      Client.ClearAll();
-    }
+    // public void Dispose()
+    // {
+    //   Client.ClearAll();
+    // }
 
   }
 }
