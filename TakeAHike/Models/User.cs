@@ -9,10 +9,10 @@ namespace HairSalon.Models
     private string _gender;
     private int _id;
 
-    public User(string name,, string gender, int id = 0)
+    public User (string name, string gender, int id = 0)
     {
       _name = name;
-      _private = gender;
+      _gender = gender;
       _id = id;
     }
 

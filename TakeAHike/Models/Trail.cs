@@ -14,7 +14,7 @@ namespace TakeAHike.Models
     private bool _wildlife;
     private bool _dogs;
 
-    public Trail (string name, int difficulty, float distance, bool waterfalls, bool summits, bool wildlife, bool dogs, int id = 0)
+    public Trail (string name, int difficulty, float distance, bool waterfalls = false, bool summits = false, bool wildlife =false, bool dogs = false, int id = 0)
     {
       _name = name;
       _id = id;
@@ -114,6 +114,56 @@ namespace TakeAHike.Models
       if (conn != null)
       {
         conn.Dispose();
+      }
+    }
+
+    public static List<Trail> GetAll()
+    {
+      List<Trail> allTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails;";
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int Id = rdr.GetInt32(0);
+        string Name = rdr.GetString(1);
+        int Difficulty = rdr.GetInt32(2);
+        float Distance = rdr.GetFloat(3);
+        bool Waterfalls = rdr.GetBoolean(4);
+        bool Summits = rdr.GetBoolean(5);
+        bool Wildlife = rdr.GetBoolean(6);
+        bool Dogs = rdr.GetBoolean(7);
+        Trail newTrail = new Trail(Name, Difficulty, Distance, Waterfalls, Summits, Wildlife, Dogs, Id);
+        allTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return allTrails;
+    }
+
+    public override bool Equals(System.Object otherTrail)
+    {
+      if(!(otherTrail is Trail))
+      {
+        return false;
+      }
+      else
+      {
+        Trail newTrail = (Trail) otherTrail;
+        bool idEquality = this.GetId().Equals(newTrail.GetId());
+        bool nameEquality = this.GetName().Equals(newTrail.GetName());
+        bool difficultyEquality = this.GetDifficulty().Equals(newTrail.GetDifficulty());
+        bool distanceEquality = this.GetDistance().Equals(newTrail.GetDistance());
+        bool waterfallsEquality = this.GetWaterfalls().Equals(newTrail.GetWaterfalls());
+        bool summitsEquality = this.GetSummits().Equals(newTrail.GetSummits());
+        bool wildlifeEquality = this.GetWildlife().Equals(newTrail.GetWildlife());
+        bool dogsEquality = this.GetDogs().Equals(newTrail.GetDogs());
+        return (idEquality && nameEquality && difficultyEquality && distanceEquality && waterfallsEquality && summitsEquality && wildlifeEquality && dogsEquality);
       }
     }
 
