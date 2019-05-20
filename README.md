@@ -2,15 +2,15 @@
 
 #### An app to match hikers to fellow hikers and trails based on trail features and, in Phase 2, match hikers to potential hiking partners.
 
-# By **Marguerite Kennedy, Maya Frame and Kevin Garvey**
+#### By **Marguerite Kennedy, Maya Frame and Kevin Garvey**
 
 ## Description
 
 Epicodus C#/.NET group project, to be presented on *Thursday, May 23, 2019*.
 
-     Our ultimate vision is to create an app to connect people interested in finding hikes and co-hikers. In the initial phase, we'll match hikers to hikes, based in data in our (admittedly small) database of trails near Seattle, WA.
+Our ultimate vision is to create an app to connect people interested in finding hikes and co-hikers. In the initial phase, we'll match hikers to hikes, based in data in our (admittedly small) database of trails near Seattle, WA.
 
-     In Phase 2, we hope to match hikers based on mutual interests and other filters. Thus, we'd have a list of desired features for TRAILS, and a list of features for HIKERS, and the match would be based on the intersection of desired criteria.
+In Phase 2, we hope to match hikers based on mutual interests and other filters. Thus, we'd have a list of desired features for TRAILS, and a list of features for HIKERS, and the match would be based on the intersection of desired criteria.
 
 ### Specs
 
