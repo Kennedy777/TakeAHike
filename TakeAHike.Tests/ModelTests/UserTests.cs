@@ -10,7 +10,7 @@ namespace TakeAHike.Tests
   {
     public UserTest()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=kevin_garvey_test;";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=takeahiketest;";
     }
 
     // public void Dispose()
@@ -18,5 +18,21 @@ namespace TakeAHike.Tests
     //   Client.ClearAll();
     // }
 
+    [TestMethod]
+    public void UserConstructor_CreatesNewInstanceOfObject_User()
+    {
+    user newUser = new User("Test Name");
+    Asser.AreEqual(typeof(user), newUser.GetType());
+    }
+
+    [TestMethod]
+    public void GetName_ReturnsUserName_String()
+    {
+      string name = "Test Name";
+      user newUser = new User(name);
+      string result = newUser.GetName();
+      Assert.AreEqual(name, result)
+    }
+    
   }
 }
