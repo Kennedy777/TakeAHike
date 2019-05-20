@@ -6,9 +6,9 @@ using System;
 namespace TakeAHike.Tests
 {
   [TestClass]
-  public class UserTest : IDisposable
+  public class TrailTest : IDisposable
   {
-    public UserTest()
+    public TrailTest()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=kevin_garvey_test;";
     }

@@ -5,7 +5,7 @@ using System;
 
 namespace TakeAHike.Controllers
 {
-  public class HikesController : Controller
+  public class TrailsController : Controller
   {
 
   }
