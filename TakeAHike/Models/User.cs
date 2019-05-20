@@ -6,11 +6,13 @@ namespace HairSalon.Models
   public class User
   {
     private string _name;
+    private string _gender;
     private int _id;
 
-    public User(string name, int id = 0)
+    public User(string name,, string gender, int id = 0)
     {
       _name = name;
+      _private = gender;
       _id = id;
     }
 
@@ -21,6 +23,15 @@ namespace HairSalon.Models
     public void SetName(string newName)
     {
       _name = newName;
+    }
+
+    public string GetGender()
+    {
+      return _gender;
+    }
+    public void SetGender(string newGender)
+    {
+      _gender = newGender;
     }
 
     public int GetId()
