@@ -10,7 +10,7 @@ namespace TakeAHike.Tests
   {
     public TrailTest()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=takeahiketest;";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=takeahike_test;";
     }
 
     public void Dispose()
