@@ -141,14 +141,15 @@ namespace TakeAHike.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        int TrailId = rdr.GetInt32(0);
-        string TrailName = rdr.GetString(1);
-        int TrailDifficulty = rdr.GetInt32(2);
-        float TrailDistance = rdr.GetFloat(3);
+        string TrailName = rdr.GetString(0);
+        int TrailId = rdr.GetInt32(1);
+        bool TrailDogs = rdr.GetBoolean(2);
+        bool TrailSummits = rdr.GetBoolean(3);
         bool TrailWaterfalls = rdr.GetBoolean(4);
-        bool TrailSummits = rdr.GetBoolean(5);
-        bool TrailWildlife = rdr.GetBoolean(6);
-        bool TrailDogs = rdr.GetBoolean(7);
+        bool TrailWildlife = rdr.GetBoolean(5);
+        int TrailDistance = rdr.Getint32(6);
+        int TrailDifficulty = rdr.GetInt32(7);
+
         Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailWaterfalls, TrailSummits, TrailWildlife, TrailDogs, TrailId);
         allTrails.Add(newTrail);
       }
