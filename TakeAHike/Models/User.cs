@@ -5,33 +5,67 @@ namespace HairSalon.Models
 {
   public class User
   {
-    private string _name;
-    private string _gender;
+    private string _userName;
+    private string _firstName;
+    private string _lastName;
+    private int _zip;
+    private int _phone;
+    private string _email;
+    private int _gender;
+    private int _car;
     private int _id;
 
-    public User(string name, string gender, int id = 0)
+    public User(string userName, string firstName, string lastName, int zip, int phone, string email, int gender, int car, int id = 0)
     {
-      _name = name;
+      _userName =userName;
+      _firstName = firstName;
+      _lastName = lastName;
+      _zip = zip;
+      _phone = phone;
+      _email = email;
       _gender = gender;
+      _car = car;
       _id = id;
     }
 
-    public string GetName()
+    public string GetUserName()
     {
-      return _name;
-    }
-    public void SetName(string newName)
-    {
-      _name = newName;
+      return _userName;
     }
 
-    public string GetGender()
+    public string GetFirstName()
+    {
+      return _firstName;
+    }
+
+    public string GetLastName()
+    {
+      return _lastName;
+    }
+
+    public int GetZip()
+    {
+      return _zip;
+    }
+
+    public int GetPhone()
+    {
+      return _phone;
+    }
+
+    public string GetEmail()
+    {
+      return _email;
+    }
+
+    public int GetGender()
     {
       return _gender;
     }
-    public void SetGender(string newGender)
+
+    public int GetCar()
     {
-      _gender = newGender;
+      return _car;
     }
 
     public int GetId()
@@ -44,15 +78,43 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO users (name, gender) VALUES (@userName, @userGender);";
-      MySqlParameter userName = new MySqlParameter();
-      userName.ParameterName = "@userName";
-      userName.Value = this._name;
-      cmd.Parameters.Add(userName);
+      cmd.CommandText = @"INSERT INTO users (user_name, name, zip, phone_number, email, gender, car) VALUES (@userUserName, @userFirstName, @userLastName, @userZip, @userPhone, @userEmail, @userGender, @userCar);";
+
+      MySqlParameter userUserName = new MySqlParameter();
+      userUserName.ParameterName = "@userUserName";
+      userUserName.Value = this._username;
+      cmd.Parameters.Add(userUserName);
+
+      MySqlParameter userFirstName = new MySqlParameter();
+      userFirstName.ParameterName = "@userFirstName";
+      userFirstName.Value = this._firstName;
+      cmd.Parameters.Add(userFirstName);
+
+      MySqlParameter userLastName = new MySqlParameter();
+      userLastName.ParameterName = "@userLastName";
+      userLastName.Value = this._lastName;
+      cmd.Parameters.Add(userLastName);
+
+      MySqlParameter userZip = new MySqlParameter();
+      userZip.ParameterName = "@userZip";
+      userZip.Value = this._zip;
+      cmd.Parameters.Add(userZip);
+
+      MySqlParameter userPhone= new MySqlParameter();
+      userPhone.ParameterName = "@userPhone";
+      userPhone.Value = this._phone;
+      cmd.Parameters.Add(userPhone);
+
       MySqlParameter userGender = new MySqlParameter();
       userGender.ParameterName = "@userGender";
       userGender.Value = this._gender;
       cmd.Parameters.Add(userGender);
+
+      MySqlParameter userCar = new MySqlParameter();
+      userCar.ParameterName = "@userCar";
+      userCar.Value = this._car;
+      cmd.Parameters.Add(userCar);
+
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
       conn.Close()
@@ -86,9 +148,15 @@ namespace HairSalon.Models
       while(rdr.Read())
       {
         int UserId = rdr.GetInt32(0);
-        string UserName = rdr.GetString(1);
-        string UserGender = rdr.GetString(2);
-        User newUser = new User(UserName, UserGender, UserId);
+        string UserUserName = rdr.GetString(1);
+        string UserFirstName = rdr.GetString(2);
+        string UserLastName = rdr.GetString(3);
+        int UserZip = rdr.GetInt32(4);
+        int UserPhone = rdr.GetInt32(5);
+        string UserEmail = rdr.GetString(6);
+        int UserGender = rdr.GetString(7);
+        int UserCar = rdr.GetInt(8);
+        User newUser = new User(UserUserName, UserFirstName, UserLastName, UserZip, UserPhone, UserEmail, UserGender, UserCar, UserId);
         allUsers.Add(newUser);
       }
       conn.Close();
@@ -109,9 +177,15 @@ namespace HairSalon.Models
       {
         User newUser = (User) otherUser;
         bool idEquality = this.GetId().Equals(newUser.GetId());
-        bool nameEquality = this.GetName().Equals(newUser.GetName());
+        bool userNameEquality = this.GetUserName().Equals(newUser.GetUserName());
+        bool firstNameEquality = this.GetFirstName().Equals(newUser.GetFirstName());
+        bool lastNameEquality = this.GetLastName().Equals(newUser.GetLastName());
+        bool zipEquality = this.GetZip().Equals(newUser.GetZip());
+        bool phoneEquality = this.GetPhone().Equals(newUser.GetPhone());
+        bool emailEquality = this.GetEmail().Equals(newUser.GetEmail());
         bool genderEquality = this.GetGender().Equals(newUser.GetName());
-        return (idEquality && genderEquality && nameEquality);
+        bool carEquality = this.GetCar().Equals(newUser.GetCar());
+        return (idEquality && userNameEquality && firstNameEquality && lastNameEquality && zipEquality && phoneEquality && emailEquality && genderEquality && carEquality);
       }
     }
 

@@ -141,8 +141,8 @@ namespace TakeAHike.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        string TrailName = rdr.GetString(0);
-        int TrailId = rdr.GetInt32(1);
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
         bool TrailDogs = rdr.GetBoolean(2);
         bool TrailSummits = rdr.GetBoolean(3);
         bool TrailWaterfalls = rdr.GetBoolean(4);
