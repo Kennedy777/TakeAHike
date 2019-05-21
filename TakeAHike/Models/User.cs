@@ -195,6 +195,40 @@ namespace TakeAHike.Models
       }
     }
 
+    public static User Find(int userId)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM users WHERE id = (@id);";
+      MySqlParameter id = new MySqlParameter("@id", userId);
+      cmd.Parameters.Add(id);
+      MySqlDataReader rdr = cmd .ExecuteReader() as MySqlDataReader;
+      int readId = 0;
+      string readUserName = "";
+      string readFirstName = "";
+      string readLastName = "";
+      int readZip = 0;
+      string readPhone = "";
+      string readEmail = "";
+      int readGender = 0;
+      int readCar = 0;
+      while(rdr.Read())
+      {
+        readId = rdr.GetInt32(0);
+        readUserName = rdr.GetString(1);
+        readFirstName = rdr.GetString(2);
+        readLastName = rdr.GetString(3);
+        readZip = rdr.GetInt32(4);
+        readPhone = rdr.GetString(5);
+        readEmail = rdr.GetString(6);
+        readGender = rdr.GetInt32(7);
+        readCar = rdr.GetInt32(8);
+      }
+      User foundUser = new User(readUserName, readFirstName, readLastName, readZip, readPhone, readEmail, readGender, readCar, readId);
+      return foundUser;
+    }
+
 
 
 

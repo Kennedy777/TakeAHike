@@ -86,5 +86,14 @@ namespace TakeAHike.Tests
       CollectionAssert.AreEqual(result, newList);
     }
 
+    [TestMethod]
+    public void Find_ReturnsTrailInDataBase_Trail()
+    {
+      Trail testTrail = new Trail("Test Name", 1, 5.5f);
+      testTrail.Save();
+      Trail foundTrail = Trail.Find(testTrail.GetId());
+      Assert.AreEqual(testTrail, foundTrail);
+    }
+
   }
 }

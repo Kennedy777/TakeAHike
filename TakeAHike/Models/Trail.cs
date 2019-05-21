@@ -149,15 +149,7 @@ namespace TakeAHike.Models
         bool TrailSummits = rdr.GetBoolean(3);
         bool TrailWaterfalls = rdr.GetBoolean(4);
         bool TrailWildlife = rdr.GetBoolean(5);
-<<<<<<< HEAD
         float TrailDistance = rdr.GetFloat(6);
-=======
-<<<<<<< HEAD
-        int TrailDistance = rdr.GetInt32(6);
-=======
-        int TrailDistance = rdr.Getint32(6);
->>>>>>> 7dfe82512937da4a29e69b47840e33eacbaec4c3
->>>>>>> master
         int TrailDifficulty = rdr.GetInt32(7);
 
         Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailWaterfalls, TrailSummits, TrailWildlife, TrailDogs, TrailId);
@@ -190,6 +182,38 @@ namespace TakeAHike.Models
         bool dogsEquality = this.GetDogs() == newTrail.GetDogs();
         return (idEquality && nameEquality && difficultyEquality && distanceEquality && waterfallsEquality && summitsEquality && wildlifeEquality && dogsEquality);
       }
+    }
+
+    public static Trail Find(int trailId)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE id = (@id);";
+      MySqlParameter id = new MySqlParameter("@id", trailId);
+      cmd.Parameters.Add(id);
+      MySqlDataReader rdr = cmd .ExecuteReader() as MySqlDataReader;
+      int readId = 0;
+      string readName = "";
+      bool readDogs = false;
+      bool readSummits = false;
+      bool readWaterfalls = false;
+      bool readWildlife = false;
+      float readDistance = 0;
+      int readDifficulty = 0;
+      while(rdr.Read())
+      {
+        readId = rdr.GetInt32(0);
+        readName = rdr.GetString(1);
+        readDogs = rdr.GetBoolean(2);
+        readSummits = rdr.GetBoolean(3);
+        readWaterfalls = rdr.GetBoolean(4);
+        readWildlife = rdr.GetBoolean(5);
+        readDistance = rdr.GetFloat(6);
+        readDifficulty = rdr.GetInt32(7);
+      }
+      Trail foundTrail = new Trail(readName, readDifficulty, readDistance, readWaterfalls, readSummits, readWildlife, readDogs, readId);
+      return foundTrail;
     }
 
   }

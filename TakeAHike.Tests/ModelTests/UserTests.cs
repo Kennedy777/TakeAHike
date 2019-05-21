@@ -82,5 +82,14 @@ namespace TakeAHike.Tests
       CollectionAssert.AreEqual(result, newList);
     }
 
+    [TestMethod]
+    public void Find_ReturnsUserInDataBase_User()
+    {
+      User testUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      testUser.Save();
+      User foundUser = User.Find(testUser.GetId());
+      Assert.AreEqual(testUser, foundUser);
+    }
+
   }
 }
