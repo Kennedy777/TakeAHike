@@ -2,7 +2,7 @@
 
 #### An app to match hikers to fellow hikers and trails based on trail features and, in Phase 2, match hikers to potential hiking partners.
 
-#### By **Marguerite Kennedy, Maya Frame and Kevin Garvey**
+#### By **Marguerite Kennedy, Maya Frame, Kevin Garvey, and Kyle Harrington**
 
 ## Description
 
@@ -54,10 +54,10 @@ Desired eventual functionality:
 
 ## Support and contact details
 
-_Contact Kennedy777, meyerclemon, kmgarvey279 on Github_
+_Contact Kennedy777, meyerclemon, kmgarvey279, Relykon on Github_
 
 ### License
 
 *{This software is licensed under the GPL license}*
 
-Copyright (c) 2019 **_Marguerite Kennedy, Maya Frame, and Kevin Garvey_**
+Copyright (c) 2019 **_Marguerite Kennedy, Maya Frame, Kevin Garvey, and Kyle Harrington_**
