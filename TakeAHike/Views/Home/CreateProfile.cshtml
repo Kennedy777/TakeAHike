@@ -3,38 +3,33 @@
   Layout="Shared/_Layout.cshtml";
 }
 @{
-  var user = Model["user"];
+  var users = Model["users"];
 }
 <div class="container">
 
-  <form action="/user/update" method="post">
+  <form action="/users/update" method="post">
     <input type="hidden" name="_method" value="PATCH">
     <div class= "form-group">
       <label for="userName">User Name</label>
-      <input class = "form-control" type="text" name="user.Name" value =@user.UserName>
+      <input class = "form-control" type="text" name="userName" value ="@users.UserName">
       <label for="password">Password</label>
-      <input class = "form-control" type="password" name="user-password" value = "@user.Password">
+      <input class = "form-control" type="password" name="password" value = "@users.Password">
     </div>
     <div class= "form-group">
       <label for="firstName">First Name</label>
-      <input class = "form-control" type="text" name="first-name===" value = "@user.FirstName" required>
+      <input class = "form-control" type="text" name="firstName" value = "@users.FirstName" required>
       <label for="lastName">Last Name</label>
-      <input class = "form-control" type="text" name="lastNane" value = "@user.LastName" required>
+      <input class = "form-control" type="text" name="lastNane" value = "@users.LastName" required>
     </div>
     <div class= "form-group">
       <label for="zip">Zip Code</label>
-      <input class = "form-control" type="text" name="zip" value = "@user.ZipCode">
+      <input class = "form-control" type="text" name="zip" value = "@users.ZipCode">
 
-      <label for="phone-number">Phone Number</label>
-      <input class = "form-control" type="text" name="phone-number" value = "@user.PhoneNumber">
+      <label for="phone">Phone Number</label>
+      <input class = "form-control" type="text" name="phone" value = "@users.Phone">
       
       <label for="email">E-mail</label>
-      <input class = "form-control" type="text" name="email" value = "@user.Email">
-    </div>
-
-    <div class= "form-group">
-      <label for="tag-line">Tag-line</label>
-      <input class = "form-control" type="text" name="tag-line" value = "@user.TagLine">
+      <input class = "form-control" type="text" name="email" value = "@users.Email">
     </div>
 
     <div class= "form-group">
@@ -50,7 +45,7 @@
 
     <div class= "form-group">
       <label for="car">Can you provide transportation?</label>
-      <select name="transportation ">
+      <select name="car">
         <option value="0">Select</option>
         <option value="1">Yes</option>
         <option value="2">No</option>
