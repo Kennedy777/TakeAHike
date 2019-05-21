@@ -39,5 +39,41 @@ namespace HairSalon.Models
       return _id;
     }
 
+    public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO users (name, gender) VALUES (@userName, @userGender);";
+      MySqlParameter userName = new MySqlParameter();
+      userName.ParameterName = "@userName";
+      userName.Value = this._name;
+      cmd.Parameters.Add(userName);
+      MySqlParameter userGender = new MySqlParameter();
+      userGender.ParameterName = "@userGender";
+      userGender.Value = this._gender;
+      cmd.Parameters.Add(userGender);
+      cmd.ExecuteNonQuery();
+      _id = (int) cmd.LastInsertedId;
+      conn.Close()
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public static void ClearAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if( conn != null )
+      {
+        conn.Dispose();
+      }
+    }
+
   }
 }
