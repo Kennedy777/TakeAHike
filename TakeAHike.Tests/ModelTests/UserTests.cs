@@ -10,34 +10,34 @@ namespace TakeAHike.Tests
   {
     public UserTest()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=takeahike_Stest;";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=takeahike_test;";
     }
 
     public void Dispose()
     {
-      Client.ClearAll();
+      User.ClearAll();
     }
 
     [TestMethod]
     public void UserConstructor_CreatesNewInstanceOfObject_User()
     {
-    user newUser = new User("Test Name");
-    Asser.AreEqual(typeof(user), newUser.GetType());
+    User newUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+    Assert.AreEqual(typeof(User), newUser.GetType());
     }
 
     [TestMethod]
-    public void GetName_ReturnsUserName_String()
+    public void GetUserName_ReturnsUserName_String()
     {
       string name = "Test Name";
-      user newUser = new User(name);
-      string result = newUser.GetName();
-      Assert.AreEqual(name, result)
+      User newUser = new User(name, "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      string result = newUser.GetUserName();
+      Assert.AreEqual(name, result);
     }
 
     [TestMethod]
     public void Save_SavesUserToDatabase_UserList()
     {
-      User testUser = new User("Test Name", 1, "F");
+      User testUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
       testUser.Save();
       List<User> result = User.GetAll();
       List<User> testList = new List<User>{testUser};
@@ -47,7 +47,7 @@ namespace TakeAHike.Tests
     [TestMethod]
     public void Save_DatabaseAssignsIdToUser_Id()
     {
-      User testUser = new User("Test Name", 1, "F");
+      User testUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
       testUser.Save();
       User savedUser = User.GetAll()[0];
       int result = savedUser.GetId();
@@ -58,8 +58,8 @@ namespace TakeAHike.Tests
     [TestMethod]
     public void Equals_ReturnsTrueIfPropertiesAreTheSame_User()
     {
-      User testUser1 = new User("Test Name", 1, "F");
-      User testUser2 = new User("Test Name", 1, "F");
+      User testUser1 = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      User testUser2 = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
       Assert.AreEqual(testUser1, testUser2);
     }
 
@@ -73,13 +73,22 @@ namespace TakeAHike.Tests
     [TestMethod]
     public void GetAll_ReturnsAllUsers_UserList()
     {
-      User testUser1 = new User("Test Name", 1, "F");
-      User testUser2 = new User("Test Name", 1, "F");
+      User testUser1 = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      User testUser2 = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
       testUser1.Save();
       testUser2.Save();
       List<User> result = User.GetAll();
       List<User> newList = new List<User> { testUser1, testUser2 };
       CollectionAssert.AreEqual(result, newList);
+    }
+
+    [TestMethod]
+    public void Find_ReturnsUserInDataBase_User()
+    {
+      User testUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      testUser.Save();
+      User foundUser = User.Find(testUser.GetId());
+      Assert.AreEqual(testUser, foundUser);
     }
 
   }

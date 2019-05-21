@@ -4,6 +4,77 @@
 @using TakeAHike.Models;
 @using TakeAHike;
 
+<<<<<<< HEAD
   <div class="title-bar">
     <h1>Create a New Trail</h1>
   </div>
+=======
+@{
+  var trails = Model["trails"];
+}
+
+<div>
+
+  <form action="/trails/create" method="post">
+    <div class="form-group">
+      <label for="name">Trail Name: </label>
+      <input class="form-control" type="text" name="name" value="@trails.name" required>
+    </div>
+    <div class="form-group">
+      <label for="difficulty">Trail Difficulty: </label>
+      <select class="form-control" name="difficulty" required>
+        <option value="1">Level 1</option>
+        <option value="2">Level 2</option>
+        <option value="3">Level 3</option>
+        <option value="4">Level 4</option>
+        <option value="5">Level 5</option>
+      </select>
+    </div>
+    <div>
+      <label for="distance">Distance (in miles): </label>
+      <input class="form-control" type="float" name="distance" value="@trails.distance" required>
+    </div>
+    <div>
+      <label for="waterfalls">Waterfalls: </label>
+      <select class="form-control" name="waterfalls" required>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+    <div>
+      <label for="summits">View Points</label>
+      <select class="form-control" name="summits" required>
+        <option value="1">Summit Only</option>
+        <option value="2">Two View Points</option>
+        <option value="3">Three or more View Points</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <h5>Wildlife/Scenery (select all that apply): </h5>
+        <input type="checkbox" name="wildlife" value="streams">
+        <label for="streams">Streams/Rivers</label>
+        <input type="checkbox" name="wildlife" value="mountainViews">
+        <label for="mountainViews">Mountain Views</label>
+        <input type="checkbox" name="wildlife" value="meadows">
+        <label for="meadows">Meadows</label>
+        <input type="checkbox" name="wildlife" value="lakes">
+        <label for="lakes">Lakes</label>
+        <input type="checkbox" name="wildlife" value="deer">
+        <label for="deer">Deer</label>
+        <input type="checkbox" name="wildlife" value="bear">
+        <label for="bear">Bears</label>
+        <input type="checkbox" name="wildlife" value="wildcats">
+        <label for="wildcats">Wildcats</label>
+    </div>
+    <div class="form-group">
+      <label for="dogs">Dogs Allowed?</label>
+      <select class="form-control" name="dogs">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+  </form>
+
+</div>
+>>>>>>> 1fcc9d90e5930e16646c1bae5ecf5202ba66d316
