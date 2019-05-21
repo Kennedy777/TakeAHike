@@ -2774,6 +2774,14 @@
       "FileKind": "mvc"
     },
     {
+<<<<<<< HEAD
+=======
+      "FilePath": "Views/Home/LoginOrCreate.cshtml",
+      "TargetPath": "Views/Home/LoginOrCreate.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+>>>>>>> kyle_branch
       "FilePath": "Views/Home/Index.cshtml",
       "TargetPath": "Views/Home/Index.cshtml",
       "FileKind": "mvc"
@@ -2784,6 +2792,14 @@
       "FileKind": "mvc"
     },
     {
+<<<<<<< HEAD
+=======
+      "FilePath": "Views/Home/Form.cshtml",
+      "TargetPath": "Views/Home/Form.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+>>>>>>> kyle_branch
       "FilePath": "Views/Users/Index.cshtml",
       "TargetPath": "Views/Users/Index.cshtml",
       "FileKind": "mvc"
