@@ -10,11 +10,14 @@ namespace TakeAHike.Models
     private int _difficulty;
     private float _distance;
     private bool _waterfalls;
-    private bool _summits;
-    private bool _wildlife;
+    private int _summits;
+    private bool _streams;
+    private bool _mountainViews;
+    private bool _meadows;
+    private bool _lakes;
     private bool _dogs;
 
-    public Trail (string name, int difficulty, float distance, bool waterfalls, bool summits, bool wildlife, bool dogs, int id = 0)
+    public Trail (string name, int difficulty, float distance, bool waterfalls, int summits, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id = 0)
     {
       _name = name;
       _id = id;
@@ -22,7 +25,10 @@ namespace TakeAHike.Models
       _distance = distance;
       _waterfalls = waterfalls;
       _summits = summits;
-      _wildlife = wildlife;
+      _streams = streams;
+      _mountainViews = mountainViews;
+      _meadows = meadows;
+      _lakes = lakes;
       _dogs = dogs;
     }
 
@@ -51,14 +57,26 @@ namespace TakeAHike.Models
       return _waterfalls;
     }
 
-    public bool GetSummits()
+    public int GetSummits()
     {
       return _summits;
     }
 
-    public bool GetWildlife()
+    public bool GetStreams()
     {
-      return _wildlife;
+      return _streams;
+    }
+    public bool GetMountainViews()
+    {
+      return _streams;
+    }
+    public bool GetMeadows()
+    {
+      return _streams;
+    }
+    public bool GetLakes()
+    {
+      return _streams;
     }
 
     public bool GetDogs()
@@ -71,7 +89,7 @@ namespace TakeAHike.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, waterfalls, summits, wildlife, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailWaterfalls, @trailSummits, @trailWildlife, @trailDogs);";
+      cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, waterfalls, summits, streams, mountainViews, meadows, lakes, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailWaterfalls, @trailSummits, @trailWildlife, @trailDogs);";
 
       MySqlParameter trailName = new MySqlParameter();
       trailName.ParameterName = "@trailName";
@@ -98,10 +116,25 @@ namespace TakeAHike.Models
       trailSummits.Value = this._summits;
       cmd.Parameters.Add(trailSummits);
 
-      MySqlParameter trailWildlife = new MySqlParameter();
-      trailWildlife.ParameterName = "@trailWildlife";
-      trailWildlife.Value = this._wildlife;
-      cmd.Parameters.Add(trailWildlife);
+      MySqlParameter trailStreams = new MySqlParameter();
+      trailStreams.ParameterName = "@trailStreams";
+      trailStreams.Value = this._streams;
+      cmd.Parameters.Add(trailStreams);
+
+      MySqlParameter trailMountainViews = new MySqlParameter();
+      trailMountainViews.ParameterName = "@trailMountainViews";
+      trailMountainViews.Value = this._mountainViews;
+      cmd.Parameters.Add(trailMountainViews);
+
+      MySqlParameter trailmeadows = new MySqlParameter();
+      trailmeadows.ParameterName = "@trailmeadows";
+      trailmeadows.Value = this._meadows;
+      cmd.Parameters.Add(trailmeadows);
+
+      MySqlParameter trailLakes = new MySqlParameter();
+      trailLakes.ParameterName = "@trailLakes";
+      trailLakes.Value = this._lakes;
+      cmd.Parameters.Add(trailLakes);
 
       MySqlParameter trailDogs = new MySqlParameter();
       trailDogs.ParameterName = "@trailDogs";
@@ -141,14 +174,14 @@ namespace TakeAHike.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        string TrailName = rdr.GetString(0);
-        int TrailId = rdr.GetInt32(1);
-        bool TrailDogs = rdr.GetBoolean(2);
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
         bool TrailSummits = rdr.GetBoolean(3);
         bool TrailWaterfalls = rdr.GetBoolean(4);
         bool TrailWildlife = rdr.GetBoolean(5);
         int TrailDistance = rdr.GetInt32(6);
         int TrailDifficulty = rdr.GetInt32(7);
+        bool TrailDogs = rdr.GetBoolean(9);
 
         Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailWaterfalls, TrailSummits, TrailWildlife, TrailDogs, TrailId);
         allTrails.Add(newTrail);
