@@ -233,5 +233,40 @@ namespace TakeAHike.Models
       }
     }
 
+    public List<User> GetUsers()
+    {
+      List<User> allUsers = new List<User>();
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT users.* FROM trails
+        JOIN users_trails ON (trails.id = users_trails.trail_id)
+        JOIN users ON (users_trails.user_id = users.id)
+        WHERE trails.id = @trailId;";
+      MySqlParameter trailId = new MySqlParameter("@trailId", _id);
+      cmd.Parameters.Add(trailId);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int UserId = rdr.GetInt32(0);
+        string UserUserName = rdr.GetString(1);
+        string UserFirstName = rdr.GetString(2);
+        string UserLastName = rdr.GetString(3);
+        int UserZip = rdr.GetInt32(4);
+        string UserPhone = rdr.GetString(5);
+        string UserEmail = rdr.GetString(6);
+        int UserGender = rdr.GetInt32(7);
+        int UserCar = rdr.GetInt32(8);
+        User newUser = new User(UserUserName, UserFirstName, UserLastName, UserZip, UserPhone, UserEmail, UserGender, UserCar, UserId);
+        allUsers.Add(newUser);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+       conn.Dispose();
+      }
+      return allUsers;
+    }
+
   }
 }
