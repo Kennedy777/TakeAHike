@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
-namespace HairSalon.Models
+namespace TakeAHike.Models
 {
   public class User
   {
@@ -55,7 +55,7 @@ namespace HairSalon.Models
       cmd.Parameters.Add(userGender);
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
-      conn.Close()
+      conn.Close();
       if (conn != null)
       {
         conn.Dispose();

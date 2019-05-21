@@ -4,9 +4,12 @@
 } */
 
 body {
-  margin-bottom: 900px;
+
   background-image: url("/img/trail2.jpeg");
+  height: 100%;
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
+}
 
 }
