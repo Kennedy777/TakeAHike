@@ -3,7 +3,7 @@
   Layout="Shared/_Layout.cshtml";
 }
 @{
-  var user = Model["users"];
+  var users = Model["users"];
 }
 <div class="container">
 
@@ -11,23 +11,23 @@
     <input type="hidden" name="_method" value="PATCH">
     <div class= "form-group">
       <label for="userName">User Name</label>
-      <input class = "form-control" type="text" name="user.UserName" value =@users.Name>
+      <input class = "form-control" type="text" name="userName" value ="@users.UserName">
       <label for="password">Password</label>
       <input class = "form-control" type="password" name="password" value = "@users.Password">
     </div>
     <div class= "form-group">
       <label for="firstName">First Name</label>
-      <input class = "form-control" type="text" name="firstName===" value = "@users.FirstName" required>
+      <input class = "form-control" type="text" name="firstName" value = "@users.FirstName" required>
       <label for="lastName">Last Name</label>
-      <input class = "form-control" type="text" name="lastName" value = "@users.LastName" required>
+      <input class = "form-control" type="text" name="lastNane" value = "@users.LastName" required>
     </div>
     <div class= "form-group">
       <label for="zip">Zip Code</label>
-      <input class = "form-control" type="text" name="zip" value = "@users.Zip">
+      <input class = "form-control" type="text" name="zip" value = "@users.ZipCode">
 
       <label for="phone">Phone Number</label>
       <input class = "form-control" type="text" name="phone" value = "@users.Phone">
-      
+
       <label for="email">E-mail</label>
       <input class = "form-control" type="text" name="email" value = "@users.Email">
     </div>
@@ -55,7 +55,7 @@
     </div>
 
 
-    
+
 
     @if(Model["message"] == "Edit profile")
     {
@@ -72,5 +72,5 @@
     <button type="submit" class="btn btn-danger">Confirm</button>
   </form>
   <button class="hidden-button btn btn-info" type="button" name="button"><a href="/user/delete/cancel">Cancel</a></button>
- 
+
 </div>
