@@ -17,7 +17,11 @@ namespace TakeAHike.Models
     private bool _lakes;
     private bool _dogs;
 
+<<<<<<< HEAD
     public Trail (string name, int difficulty, float distance, bool waterfalls, int summits, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id = 0)
+=======
+    public Trail (string name, int difficulty, float distance, bool waterfalls = false, bool summits = false, bool wildlife = false, bool dogs = false, int id = 0)
+>>>>>>> 47aa07d5bc6bc1386b68636eaef40366912ad15a
     {
       _name = name;
       _id = id;
@@ -88,8 +92,13 @@ namespace TakeAHike.Models
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
+<<<<<<< HEAD
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, waterfalls, summits, streams, mountainViews, meadows, lakes, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailWaterfalls, @trailSummits, @trailWildlife, @trailDogs);";
+=======
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, waterfalls, summits, wildlife, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailWaterfalls, @trailSummits, @trailWildlife, @trailDogs);";
+>>>>>>> 47aa07d5bc6bc1386b68636eaef40366912ad15a
 
       MySqlParameter trailName = new MySqlParameter();
       trailName.ParameterName = "@trailName";
@@ -142,7 +151,9 @@ namespace TakeAHike.Models
       cmd.Parameters.Add(trailDogs);
 
       cmd.ExecuteNonQuery();
+
       _id = (int) cmd.LastInsertedId;
+
       conn.Close();
       if (conn != null)
       {
@@ -169,9 +180,9 @@ namespace TakeAHike.Models
       List<Trail> allTrails = new List<Trail>{};
       MySqlConnection conn = DB.Connection();
       conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM trails;";
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
         int TrailId = rdr.GetInt32(0);
@@ -179,7 +190,7 @@ namespace TakeAHike.Models
         bool TrailSummits = rdr.GetBoolean(3);
         bool TrailWaterfalls = rdr.GetBoolean(4);
         bool TrailWildlife = rdr.GetBoolean(5);
-        int TrailDistance = rdr.GetInt32(6);
+        float TrailDistance = rdr.GetFloat(6);
         int TrailDifficulty = rdr.GetInt32(7);
         bool TrailDogs = rdr.GetBoolean(9);
 
@@ -203,16 +214,100 @@ namespace TakeAHike.Models
       else
       {
         Trail newTrail = (Trail) otherTrail;
-        bool idEquality = this.GetId().Equals(newTrail.GetId());
-        bool nameEquality = this.GetName().Equals(newTrail.GetName());
-        bool difficultyEquality = this.GetDifficulty().Equals(newTrail.GetDifficulty());
-        bool distanceEquality = this.GetDistance().Equals(newTrail.GetDistance());
-        bool waterfallsEquality = this.GetWaterfalls().Equals(newTrail.GetWaterfalls());
-        bool summitsEquality = this.GetSummits().Equals(newTrail.GetSummits());
-        bool wildlifeEquality = this.GetWildlife().Equals(newTrail.GetWildlife());
-        bool dogsEquality = this.GetDogs().Equals(newTrail.GetDogs());
+        bool idEquality = this.GetId() == newTrail.GetId();
+        bool nameEquality = this.GetName() == newTrail.GetName();
+        bool difficultyEquality = this.GetDifficulty() == newTrail.GetDifficulty();
+        bool distanceEquality = this.GetDistance() == newTrail.GetDistance();
+        bool waterfallsEquality = this.GetWaterfalls() == newTrail.GetWaterfalls();
+        bool summitsEquality = this.GetSummits() == newTrail.GetSummits();
+        bool wildlifeEquality = this.GetWildlife() == newTrail.GetWildlife();
+        bool dogsEquality = this.GetDogs() == newTrail.GetDogs();
         return (idEquality && nameEquality && difficultyEquality && distanceEquality && waterfallsEquality && summitsEquality && wildlifeEquality && dogsEquality);
       }
+    }
+
+    public static Trail Find(int trailId)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE id = (@id);";
+      MySqlParameter id = new MySqlParameter("@id", trailId);
+      cmd.Parameters.Add(id);
+      MySqlDataReader rdr = cmd .ExecuteReader() as MySqlDataReader;
+      int readId = 0;
+      string readName = "";
+      bool readDogs = false;
+      bool readSummits = false;
+      bool readWaterfalls = false;
+      bool readWildlife = false;
+      float readDistance = 0;
+      int readDifficulty = 0;
+      while(rdr.Read())
+      {
+        readId = rdr.GetInt32(0);
+        readName = rdr.GetString(1);
+        readDogs = rdr.GetBoolean(2);
+        readSummits = rdr.GetBoolean(3);
+        readWaterfalls = rdr.GetBoolean(4);
+        readWildlife = rdr.GetBoolean(5);
+        readDistance = rdr.GetFloat(6);
+        readDifficulty = rdr.GetInt32(7);
+      }
+      Trail foundTrail = new Trail(readName, readDifficulty, readDistance, readWaterfalls, readSummits, readWildlife, readDogs, readId);
+      return foundTrail;
+    }
+
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM trails WHERE id = @trailsId; DELETE FROM users_trails WHERE trail_id = @trailId;";
+      MySqlParameter thisId = new MySqlParameter();
+      thisId.ParameterName = "@trailId";
+      thisId.Value = this.GetId();
+      cmd.Parameters.Add(thisId);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+       conn.Close();
+      }
+    }
+
+    public List<User> GetUsers()
+    {
+      List<User> allUsers = new List<User>();
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT users.* FROM trails
+        JOIN users_trails ON (trails.id = users_trails.trail_id)
+        JOIN users ON (users_trails.user_id = users.id)
+        WHERE trails.id = @trailId;";
+      MySqlParameter trailId = new MySqlParameter("@trailId", _id);
+      cmd.Parameters.Add(trailId);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int UserId = rdr.GetInt32(0);
+        string UserUserName = rdr.GetString(1);
+        string UserFirstName = rdr.GetString(2);
+        string UserLastName = rdr.GetString(3);
+        int UserZip = rdr.GetInt32(4);
+        string UserPhone = rdr.GetString(5);
+        string UserEmail = rdr.GetString(6);
+        int UserGender = rdr.GetInt32(7);
+        int UserCar = rdr.GetInt32(8);
+        User newUser = new User(UserUserName, UserFirstName, UserLastName, UserZip, UserPhone, UserEmail, UserGender, UserCar, UserId);
+        allUsers.Add(newUser);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+       conn.Dispose();
+      }
+      return allUsers;
     }
 
   }
