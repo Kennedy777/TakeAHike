@@ -131,6 +131,56 @@ namespace TakeAHike.Models
       }
     }
 
+    public static List<Trail> GetAll()
+    {
+      List<Trail> allTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails;";
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        string TrailName = rdr.GetString(0);
+        int TrailId = rdr.GetInt32(1);
+        bool TrailDogs = rdr.GetBoolean(2);
+        bool TrailSummits = rdr.GetBoolean(3);
+        bool TrailWaterfalls = rdr.GetBoolean(4);
+        bool TrailWildlife = rdr.GetBoolean(5);
+        int TrailDistance = rdr.Getint32(6);
+        int TrailDifficulty = rdr.GetInt32(7);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailWaterfalls, TrailSummits, TrailWildlife, TrailDogs, TrailId);
+        allTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return allTrails;
+    }
+
+    public override bool Equals(System.Object otherTrail)
+    {
+      if(!(otherTrail is Trail))
+      {
+        return false;
+      }
+      else
+      {
+        Trail newTrail = (Trail) otherTrail;
+        bool idEquality = this.GetId().Equals(newTrail.GetId());
+        bool nameEquality = this.GetName().Equals(newTrail.GetName());
+        bool difficultyEquality = this.GetDifficulty().Equals(newTrail.GetDifficulty());
+        bool distanceEquality = this.GetDistance().Equals(newTrail.GetDistance());
+        bool waterfallsEquality = this.GetWaterfalls().Equals(newTrail.GetWaterfalls());
+        bool summitsEquality = this.GetSummits().Equals(newTrail.GetSummits());
+        bool wildlifeEquality = this.GetWildlife().Equals(newTrail.GetWildlife());
+        bool dogsEquality = this.GetDogs().Equals(newTrail.GetDogs());
+        return (idEquality && nameEquality && difficultyEquality && distanceEquality && waterfallsEquality && summitsEquality && wildlifeEquality && dogsEquality);
+      }
+    }
 
   }
 }
