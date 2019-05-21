@@ -229,6 +229,62 @@ namespace TakeAHike.Models
       return foundUser;
     }
 
+    public void AddTrail(Trail newTrail)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO users_trails (user_id, trail_id) VALUES (@userId, @trailId);";
+      MySqlParameter trailId = new MySqlParameter();
+      trailId.ParameterName = "@trailId";
+      trailId.Value = newTrail.GetId();
+      cmd.Parameters.Add(trailId);
+      MySqlParameter userId = new MySqlParameter();
+      userId.ParameterName = "@userId";
+      userId.Value = this._id;
+      cmd.Parameters.Add(userId);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+       conn.Dispose();
+      }
+    }
+
+    public List<Trail> GetTrails()
+    {
+      List<Trail> allTrails = new List<Trail>();
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT trails.* FROM users
+        JOIN users_trails ON (users.id = users_trails.user_id)
+        JOIN trails ON (users_trails.trail_id = trails.id)
+        WHERE users.id = @userId;";
+      MySqlParameter userId = new MySqlParameter("@userId", _id);
+      cmd.Parameters.Add(userId);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        bool TrailDogs = rdr.GetBoolean(2);
+        bool TrailSummits = rdr.GetBoolean(3);
+        bool TrailWaterfalls = rdr.GetBoolean(4);
+        bool TrailWildlife = rdr.GetBoolean(5);
+        float TrailDistance = rdr.GetFloat(6);
+        int TrailDifficulty = rdr.GetInt32(7);
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailWaterfalls, TrailSummits, TrailWildlife, TrailDogs, TrailId);
+        allTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+       conn.Dispose();
+      }
+      return allTrails;
+    }
+
 
 
 

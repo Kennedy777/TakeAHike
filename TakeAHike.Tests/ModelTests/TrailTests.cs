@@ -95,5 +95,17 @@ namespace TakeAHike.Tests
       Assert.AreEqual(testTrail, foundTrail);
     }
 
+    [TestMethod]
+    public void AddTrail_AddsTrailToUser_TrailList()
+    {
+      Trail testTrail = new Trail("Test Name", 1, 5.5f);
+      testTrail.Save();
+      User testUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      testUser.Save();
+      testUser.AddTrail(testTrail);
+      List<Trail> result = testUser.GetTrails();
+      List<Trail> testList = new List<Trail>{ testTrail };
+      CollectionAssert.AreEqual(testList, result);
+    }
   }
 }
