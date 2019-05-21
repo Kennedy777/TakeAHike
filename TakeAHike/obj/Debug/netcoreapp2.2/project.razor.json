@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\Margu\\OneDrive\\Desktop\\TakeAHike\\TakeAHike.Tests\\TakeAHike.Tests.csproj",
+  "FilePath": "c:\\Users\\Margu\\OneDrive\\Desktop\\TakeAHike\\TakeAHike\\TakeAHike.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-2.1",
     "LanguageVersion": "2.1",
@@ -2756,6 +2756,67 @@
     ],
     "CSharpLanguageVersion": 703
   },
-  "RootNamespace": "TakeAHike.Tests",
-  "Documents": []
+  "RootNamespace": "TakeAHike",
+  "Documents": [
+    {
+      "FilePath": "Views\\Home\\LoginOrCreate.cshtml",
+      "TargetPath": "Views\\Home\\LoginOrCreate.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Trails\\New.cshtml",
+      "TargetPath": "Views\\Trails\\New.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Users\\New.cshtml",
+      "TargetPath": "Views\\Users\\New.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Users\\Show.cshtml",
+      "TargetPath": "Views\\Users\\Show.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Home\\Index.cshtml",
+      "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Users\\Index.cshtml",
+      "TargetPath": "Views\\Users\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Trails\\Index.cshtml",
+      "TargetPath": "Views\\Trails\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Home\\CreateProfile.cshtml",
+      "TargetPath": "Views\\Home\\CreateProfile.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Trails\\Show.cshtml",
+      "TargetPath": "Views\\Trails\\Show.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Shared\\_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Home\\Login.cshtml",
+      "TargetPath": "Views\\Home\\Login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Home\\Form.cshtml",
+      "TargetPath": "Views\\Home\\Form.cshtml",
+      "FileKind": "mvc"
+    }
+  ]
 }
