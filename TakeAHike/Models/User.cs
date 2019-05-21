@@ -285,6 +285,23 @@ namespace TakeAHike.Models
       return allTrails;
     }
 
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM users WHERE id = @userId; DELETE FROM users_trails WHERE user_id = @userId;";
+      MySqlParameter thisId = new MySqlParameter();
+      thisId.ParameterName = "@userId";
+      thisId.Value = this.GetId();
+      cmd.Parameters.Add(thisId);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+       conn.Close();
+      }
+    }
+
 
 
 

@@ -216,5 +216,22 @@ namespace TakeAHike.Models
       return foundTrail;
     }
 
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM trails WHERE id = @trailsId; DELETE FROM users_trails WHERE trail_id = @trailId;";
+      MySqlParameter thisId = new MySqlParameter();
+      thisId.ParameterName = "@trailId";
+      thisId.Value = this.GetId();
+      cmd.Parameters.Add(thisId);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+       conn.Close();
+      }
+    }
+
   }
 }
