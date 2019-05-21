@@ -15,33 +15,37 @@ namespace TakeAHike.Tests
 
     public void Dispose()
     {
-      Client.ClearAll();
+      Trail.ClearAll();
     }
 
     [TestMethod]
     public void TrailConstructor_CreatesNewInstanceOfObject_Trail()
     {
-    user newTrail = new Trail("Test Name");
-    Asser.AreEqual(typeof(user), newTrail.GetType());
+    Trail newTrail = new Trail("Test Name", 1, 5.5f);
+    Assert.AreEqual(typeof(Trail), newTrail.GetType());
     }
 
     [TestMethod]
     public void GetName_ReturnsTrailName_String()
     {
       string name = "Test Name";
-      user newTrail = new Trail(name);
+      Trail newTrail = new Trail(name, 1, 5.5f);
       string result = newTrail.GetName();
-      Assert.AreEqual(name, result)
+      Assert.AreEqual(name, result);
     }
 
     [TestMethod]
     public void Save_SavesTrailToDatabase_TrailList()
     {
-      Trail testTrail = new Trail("Test Name", 1, 5.5f);
-      testTrail.Save();
-      List<Trail> result = Trail.GetAll();
-      List<Trail> testList = new List<Trail>{testTrail};
-      CollectionAssert.AreEqual(testList, result);
+      List<Trail> testList1 = new List<Trail>();
+      Trail testTrail1 = new Trail("Test Name1", 1, 5.6f);
+      testTrail1.Save();
+      testList1.Add(testTrail1);
+      Trail testTrail2 = new Trail("Test Name2", 1, 5.6f);
+      testTrail2.Save();
+      testList1.Add(testTrail2);
+      List<Trail> testList2 = Trail.GetAll();
+      CollectionAssert.AreEqual(testList1, testList2);
     }
 
     [TestMethod]
