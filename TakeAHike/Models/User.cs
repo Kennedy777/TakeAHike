@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
-namespace HairSalon.Models
+namespace TakeAHike.Models
 {
   public class User
   {
@@ -55,7 +55,7 @@ namespace HairSalon.Models
       cmd.Parameters.Add(userGender);
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
-      conn.Close()
+      conn.Close();
       if (conn != null)
       {
         conn.Dispose();
@@ -74,6 +74,49 @@ namespace HairSalon.Models
         conn.Dispose();
       }
     }
+
+    public static List<User> GetAll()
+    {
+      List<User> allUsers = new List<User>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM users;";
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int UserId = rdr.GetInt32(0);
+        string UserName = rdr.GetString(1);
+        string UserGender = rdr.GetString(2);
+        User newUser = new User(UserName, UserGender, UserId);
+        allUsers.Add(newUser);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return allUsers;
+    }
+
+    public override bool Equals(System.Object otherUser)
+    {
+      if(!(otherUser is User))
+      {
+        return false;
+      }
+      else
+      {
+        User newUser = (User) otherUser;
+        bool idEquality = this.GetId().Equals(newUser.GetId());
+        bool nameEquality = this.GetName().Equals(newUser.GetName());
+        bool genderEquality = this.GetGender().Equals(newUser.GetName());
+        return (idEquality && genderEquality && nameEquality);
+      }
+    }
+
+
+
 
   }
 }
