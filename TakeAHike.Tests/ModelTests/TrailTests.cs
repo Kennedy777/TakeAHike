@@ -21,7 +21,7 @@ namespace TakeAHike.Tests
     [TestMethod]
     public void TrailConstructor_CreatesNewInstanceOfObject_Trail()
     {
-    Trail newTrail = new Trail("Test Name", 1, 5.5f);
+    Trail newTrail = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
     Assert.AreEqual(typeof(Trail), newTrail.GetType());
     }
 
@@ -29,7 +29,7 @@ namespace TakeAHike.Tests
     public void GetName_ReturnsTrailName_String()
     {
       string name = "Test Name";
-      Trail newTrail = new Trail(name, 1, 5.5f);
+      Trail newTrail = new Trail(name, 1, 2.5f, 3, true, true, true, true, true, true);
       string result = newTrail.GetName();
       Assert.AreEqual(name, result);
     }
@@ -38,10 +38,10 @@ namespace TakeAHike.Tests
     public void Save_SavesTrailToDatabase_TrailList()
     {
       List<Trail> testList1 = new List<Trail>();
-      Trail testTrail1 = new Trail("Test Name1", 1, 5.6f);
+      Trail testTrail1 = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
       testTrail1.Save();
       testList1.Add(testTrail1);
-      Trail testTrail2 = new Trail("Test Name2", 1, 5.6f);
+      Trail testTrail2 = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
       testTrail2.Save();
       testList1.Add(testTrail2);
       List<Trail> testList2 = Trail.GetAll();
@@ -51,7 +51,7 @@ namespace TakeAHike.Tests
     [TestMethod]
     public void Save_DatabaseAssignsIdToTrail_Id()
     {
-      Trail testTrail = new Trail("Test Name", 1, 5.5f);
+      Trail testTrail = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
       testTrail.Save();
       Trail savedTrail = Trail.GetAll()[0];
       int result = savedTrail.GetId();
@@ -62,8 +62,8 @@ namespace TakeAHike.Tests
     [TestMethod]
     public void Equals_ReturnsTrueIfPropertiesAreTheSame_Trail()
     {
-      Trail testTrail1 = new Trail("Test Name", 1, 5.5f);
-      Trail testTrail2 = new Trail("Test Name", 1, 5.5f);
+      Trail testTrail1 = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
+      Trail testTrail2 = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
       Assert.AreEqual(testTrail1, testTrail2);
     }
 
@@ -77,8 +77,8 @@ namespace TakeAHike.Tests
     [TestMethod]
     public void GetAll_ReturnsAllTrails_TrailList()
     {
-      Trail testTrail1 = new Trail("Test Name", 1, 5.5f);
-      Trail testTrail2 = new Trail("Test Name", 1, 5.5f);
+      Trail testTrail1 = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
+      Trail testTrail2 = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
       testTrail1.Save();
       testTrail2.Save();
       List<Trail> result = Trail.GetAll();
@@ -89,7 +89,7 @@ namespace TakeAHike.Tests
     [TestMethod]
     public void Find_ReturnsTrailInDataBase_Trail()
     {
-      Trail testTrail = new Trail("Test Name", 1, 5.5f);
+      Trail testTrail = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
       testTrail.Save();
       Trail foundTrail = Trail.Find(testTrail.GetId());
       Assert.AreEqual(testTrail, foundTrail);
@@ -98,7 +98,7 @@ namespace TakeAHike.Tests
     [TestMethod]
     public void AddTrail_AddsTrailToUser_TrailList()
     {
-      Trail testTrail = new Trail("Test Name", 1, 5.5f);
+      Trail testTrail = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
       testTrail.Save();
       User testUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
       testUser.Save();
@@ -111,13 +111,13 @@ namespace TakeAHike.Tests
     [TestMethod]
     public void GetFiltered_ReturnsSelectedTrailsInDatabase_TrailList()
     {
-      Trail testTrail1 = new Trail();
+      Trail testTrail1 = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
       testTrail1.Save();
-      Trail testTrail2 = new Trail();
+      Trail testTrail2 = new Trail("TrailName2", 1, 2.5f, 3, false, true, true, true, true, true);
       testTrail2.Save();
-      List<Trail> result = Trail.GetFiltered();
+      List<Trail> result = Trail.GetFiltered(1, 2.5f, 3, true, true, true, true, true, true);
       List<Trail> testList = new List<Trail>{ testTrail1 };
-      CollectionAssert.AreEqual(testList, result); 
+      CollectionAssert.AreEqual(testList, result);
     }
   }
 }

@@ -89,7 +89,7 @@ namespace TakeAHike.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, waterfalls, summits, streams, mountainViews, meadows, lakes, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailSummits, @trailWaterfalls, @trailStreams, @trailMountainViews, @trailMeadows, @trailLakes @trailDogs);";
+      cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, summits, waterfalls, streams, mountain_views, meadows, lakes, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailSummits, @trailWaterfalls, @trailStreams, @trailMountainViews, @trailMeadows, @trailLakes, @trailDogs);";
 
       MySqlParameter trailName = new MySqlParameter();
       trailName.ParameterName = "@trailName";
@@ -199,13 +199,13 @@ namespace TakeAHike.Models
       return allTrails;
     }
 
-    public static List<Trail> GetFiltered(int inputtedDifficulty, float inputtedDistance, bool inputtedWaterfalls, int inputtedSummits, bool inputtedStreams, bool inputtedMountainViews, bool inputtedMeadows, bool inputtedLakes, bool inputtedWildlife, bool inputtedDogs)
+    public static List<Trail> GetFiltered(int inputtedDifficulty, float inputtedDistance, int inputtedSummits, bool inputtedWaterfalls, bool inputtedStreams, bool inputtedMountainViews, bool inputtedMeadows, bool inputtedLakes, bool inputtedDogs)
     {
       List<Trail> filteredTrails = new List<Trail>{};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM trails WHERE difficulty = @difficulty AND distance = @distance AND waterfalls = @waterfalls AND summits = @summits AND streams = @streams AND mountainViews = @mountainViews AND meadows = @meadows AND lakes = @lakes AND dogs = @dogs;";
+      cmd.CommandText = @"SELECT * FROM trails WHERE difficulty = @difficulty AND distance = @distance AND waterfalls = @waterfalls AND summits = @summits AND streams = @streams AND mountain_views = @mountainViews AND meadows = @meadows AND lakes = @lakes AND dogs = @dogs;";
 
       MySqlParameter difficultyFilter = new MySqlParameter();
       difficultyFilter.ParameterName = "@difficulty";
@@ -265,8 +265,7 @@ namespace TakeAHike.Models
         bool TrailMountainViews = rdr.GetBoolean(7);
         bool TrailMeadows = rdr.GetBoolean(8);
         bool TrailLakes = rdr.GetBoolean(9);
-        bool TrailWildlife = rdr.GetBoolean(10);
-        bool TrailDogs = rdr.GetBoolean(11);
+        bool TrailDogs = rdr.GetBoolean(10);
 
         Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
         filteredTrails.Add(newTrail);
