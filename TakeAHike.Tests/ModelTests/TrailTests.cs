@@ -35,6 +35,14 @@ namespace TakeAHike.Tests
     }
 
     [TestMethod]
+    public void GetWaterfalls_ReturnsTrailWaterfalls_True()
+    {
+      Trail newTrail = new Trail("Test Name", 1, 2.5f, 3, true, true, true, true, true, true);
+      bool result = newTrail.GetWaterfalls();
+      Assert.AreEqual(true, result);
+    }
+
+    [TestMethod]
     public void Save_SavesTrailToDatabase_TrailList()
     {
       List<Trail> testList1 = new List<Trail>();

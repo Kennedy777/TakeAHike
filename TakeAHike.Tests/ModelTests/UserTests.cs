@@ -103,5 +103,17 @@ namespace TakeAHike.Tests
       CollectionAssert.AreEqual(testList, result);
     }
 
+    [TestMethod]
+    public void Edit_EditsUserName_String()
+    {
+      string Name1 = "Test1";
+      User testUser = new User(Name1, "first", "last", 98105, "(803)234-5554", "email@email.com", 2, 2);
+      testUser.Save();
+      string Name2 = "Test2";
+      testUser.Edit(Name2, "first", "last", 98105, "(803)234-5554", "email@email.com", 2, 2);
+      string result = User.Find(testUser.GetId()).GetUserName();
+      Assert.AreEqual(Name2, result);
+    }
+
   }
 }

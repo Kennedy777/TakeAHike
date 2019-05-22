@@ -347,6 +347,74 @@ namespace TakeAHike.Models
       }
     }
 
+    public void Edit(string newUserName, string newFirstName, string newLastName, int newZip, string newPhone, string newEmail, int newGender, int newCar)
+  {
+    MySqlConnection conn = DB.Connection();
+    conn.Open();
+    var cmd = conn.CreateCommand() as MySqlCommand;
+    cmd.CommandText = @"UPDATE users SET user_name = @userUserName WHERE id = @userId; UPDATE users SET first_name = @userFirstName WHERE id = @userId; UPDATE users SET last_name = @userLastName WHERE id = @userId; UPDATE users SET zip = @userZip WHERE id = @userId; UPDATE users SET phone_number = @userPhoneNumber WHERE id = @userId; UPDATE users SET email = @userEmail WHERE id = @userId; UPDATE users SET gender = @userGender WHERE id = @userId; UPDATE users SET car = @userCar WHERE id = @userId;";
+
+    MySqlParameter userUserNameParameter = new MySqlParameter();
+    userUserNameParameter.ParameterName = "@userUserName";
+    userUserNameParameter.Value = newUserName;
+    cmd.Parameters.Add(userUserNameParameter);
+
+    MySqlParameter userFirstNameParameter = new MySqlParameter();
+    userFirstNameParameter.ParameterName = "@userFirstName";
+    userFirstNameParameter.Value = newFirstName;
+    cmd.Parameters.Add(userFirstNameParameter);
+
+    MySqlParameter userLastNameParameter = new MySqlParameter();
+    userLastNameParameter.ParameterName = "@userLastName";
+    userLastNameParameter.Value = newLastName;
+    cmd.Parameters.Add(userLastNameParameter);
+
+    MySqlParameter userZipParameter = new MySqlParameter();
+    userZipParameter.ParameterName = "@userZip";
+    userZipParameter.Value = newZip;
+    cmd.Parameters.Add(userZipParameter);
+
+    MySqlParameter userPhoneParameter = new MySqlParameter();
+    userPhoneParameter.ParameterName = "@userPhoneNumber";
+    userPhoneParameter.Value = newPhone;
+    cmd.Parameters.Add(userPhoneParameter);
+
+    MySqlParameter userEmailParameter = new MySqlParameter();
+    userEmailParameter.ParameterName = "@userEmail";
+    userEmailParameter.Value = newEmail;
+    cmd.Parameters.Add(userEmailParameter);
+
+    MySqlParameter userGenderParameter = new MySqlParameter();
+    userGenderParameter.ParameterName = "@userGender";
+    userGenderParameter.Value = newGender;
+    cmd.Parameters.Add(userGenderParameter);
+
+    MySqlParameter userCarParameter = new MySqlParameter();
+    userCarParameter.ParameterName = "@userCar";
+    userCarParameter.Value = newCar;
+    cmd.Parameters.Add(userCarParameter);
+
+    MySqlParameter userIdParameter = new MySqlParameter();
+    userIdParameter.ParameterName = "@userId";
+    userIdParameter.Value = this._id;
+    cmd.Parameters.Add(userIdParameter);
+
+    cmd.ExecuteNonQuery();
+    _userName = newUserName;
+    _firstName = newFirstName;
+    _lastName = newLastName;
+    _zip = newZip;
+    _phone = newPhone;
+    _email = newEmail;
+    _gender = newGender;
+    _car = newCar;
+    conn.Close();
+    if (conn != null)
+    {
+      conn.Dispose();
+    }
+  }
+
 
   }
 }
