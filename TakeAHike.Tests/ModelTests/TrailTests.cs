@@ -119,5 +119,17 @@ namespace TakeAHike.Tests
       List<Trail> testList = new List<Trail>{ testTrail1 };
       CollectionAssert.AreEqual(testList, result);
     }
+
+    [TestMethod]
+    public void FilterByDifficulty_ReturnsSelectedTrailsInDatabase_TrailList()
+    {
+      Trail testTrail1 = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
+      testTrail1.Save();
+      Trail testTrail2 = new Trail("TrailName2", 5, 2.5f, 3, false, true, true, true, true, true);
+      testTrail2.Save();
+      List<Trail> result = Trail.FilterByDifficulty(1);
+      List<Trail> testList = new List<Trail>{ testTrail1 };
+      CollectionAssert.AreEqual(testList, result);
+    }
   }
 }
