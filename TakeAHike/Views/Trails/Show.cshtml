@@ -1,9 +1,51 @@
+<!DOCTYPE html>
 @{
   Layout = "_Layout";
 }
 @using TakeAHike.Models;
 @using TakeAHike;
+<html>
+<head>
+  <title>@Model.GetName()</title>
+</head>
+<body>
+  <h1>Take A Hike!</h1>
+  <div class="container">
+    <h2>Hike the @Model.GetName()</h2>
+    <br>
+    <h3>Trail Details: </h3>
+    <br>
+    <h4>Difficulty: Level + "@Model.GetDifficulty()"</h4>
+    <h5>Total Distance: @Model.GetDistance()</h5>
+    <h5>View Points: </h5>
+      @if(@Model.GetSummits() == 1)
+      {
+        <p>There's only one summit</p>
+      }
+      @if(@Model.GetSummits() == 2)
+      {
+        <p> There are two total view points</p>
+      }
+      @if(@Model.GetSummits() == 3)
+      {
+        <p>There are three or more view points</p>
+      }
+    <h6>Dogs Allowed?</h6>
+      @if(@Model.GetDogs() = "true")
+      {
+        <p>Yes @Model.GetName() is a dog friendly trail!</p>
+      }
+      @if(@Model.GetDogs() = "false")
+      {
+        <p>Sorry, dogs not allowed on the @Model.GetName() trail.</p>
+      }
+      <h4>Features & Scenery of the @Model.GetName() hike: </h4>
+        <ul>
+          @if(@Model.Get)
+          <li></li>
+        </ul>
 
-<div class="title-bar">
-  <h1>Here are your Trail matches</h1>
-</div>
+
+  </div>
+</body>
+</html>
