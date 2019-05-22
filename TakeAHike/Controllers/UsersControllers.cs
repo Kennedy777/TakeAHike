@@ -40,6 +40,14 @@ namespace TakeAHike.Controllers
       return RedirectToAction("Index");
     }
 
+    [HttpPost("/users/{userId}/delete")]
+    public ActionResult Delete(int userId)
+    {
+      User newUser = User.Find(userId);
+      newUser.Delete();
+      return RedirectToAction("Index");
+    }
+
 
     //This method creates a user and then returns the user to the Show page
     // [HttpPost("/users")]

@@ -22,7 +22,8 @@
     <nav class="bottom">
       <a href="/users/new"><button type="button">Create a user account</button></a>
       <a href="/users"><button type="button">Log In</button></a>
-      <a href=""><button type="button">Delete Profile</button></a>
+      <a href='/users/@Model["user"].GetId()/edit'><button type="button">Edit Profile</button></a>
+      <a href='/users/@Model["user"].GetId()/delete'><button type="button">Delete Profile</button></a>
     </nav>
   </div>
 </div>
