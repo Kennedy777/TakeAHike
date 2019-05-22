@@ -17,12 +17,8 @@ namespace TakeAHike.Models
     private bool _lakes;
     private bool _dogs;
 
-<<<<<<< HEAD
     public Trail (string name, int difficulty, float distance, int summits, bool waterfalls, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id = 0)
     {
-=======
-    public Trail (string name, int difficulty, float distance, bool waterfalls, int summits, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id = 0)
->>>>>>> 3e925441ac3ff6c8e8d8aaef3f1ef11f17fdb3a0
       _name = name;
       _id = id;
       _difficulty = difficulty;
