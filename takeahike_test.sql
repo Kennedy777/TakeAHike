@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 22, 2019 at 09:23 PM
+-- Generation Time: May 22, 2019 at 10:17 PM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -17,10 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `takeahike_test`
+-- Database: `TakeAHike_test`
 --
-CREATE DATABASE IF NOT EXISTS `takeahike_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `takeahike_test`;
 
 -- --------------------------------------------------------
 
