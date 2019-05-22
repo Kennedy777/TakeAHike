@@ -196,6 +196,95 @@ namespace TakeAHike.Models
       return allTrails;
     }
 
+    public static List<Trail> GetFiltered(int inputtedDifficulty, float inputtedDistance, bool inputtedWaterfalls, int inputtedSummits, bool inputtedStreams, bool inputtedMountainViews, bool inputtedMeadows, bool inputtedLakes, bool inputtedWildlife, bool inputtedDogs)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE difficulty = @difficulty AND distance = @distance AND waterfalls = @waterfalls AND summits = @summits AND streams = @streams AND mountainViews = @mountainViews AND meadows = @meadows AND lakes = @lakes AND wildlife = @wildlife AND dogs = @dogs;";
+      MySqlParameter thisId = new MySqlParameter();
+      thisId.ParameterName = "@trailId";
+      thisId.Value = this.GetId();
+      cmd.Parameters.Add(thisId);
+
+      MySqlParameter difficultyFilter = new MySqlParameter();
+      difficultyFilter.ParameterName = "@difficulty";
+      difficultyFilter.Value = inputtedDifficulty;
+      cmd.Parameters.Add(difficultyFilter);
+
+      MySqlParameter distanceFilter = new MySqlParameter();
+      distanceFilter.ParameterName = "@distance";
+      distanceFilter.Value = inputtedDistance;
+      cmd.Parameters.Add(distanceFilter);
+
+      MySqlParameter waterfallsFilter = new MySqlParameter();
+      waterfallsFilter.ParameterName = "@waterfalls";
+      waterfallsFilter.Value = inputtedWaterfalls;
+      cmd.Parameters.Add(waterfallsFilter);
+
+      MySqlParameter summitsFilter = new MySqlParameter();
+      summitsFilter.ParameterName = "@summits";
+      summitsFilter.Value = inputtedSummits;
+      cmd.Parameters.Add(summitsFilter);
+
+      MySqlParameter streamsFilter = new MySqlParameter();
+      streamsFilter.ParameterName = "@streams";
+      streamsFilter.Value = inputtedStreams;
+      cmd.Parameters.Add(streamsFilter);
+
+      MySqlParameter mountainFilter = new MySqlParameter();
+      mountainFilter.ParameterName = "@mountainViews";
+      mountainFilter.Value = inputtedMountainViews;
+      cmd.Parameters.Add(mountainFilter);
+
+      MySqlParameter meadowFilter = new MySqlParameter();
+      meadowFilter.ParameterName = "@meadows";
+      meadowFilter.Value = inputtedMeadows;
+      cmd.Parameters.Add(meadowFilter);
+
+      MySqlParameter lakeFilter = new MySqlParameter();
+      lakeFilter.ParameterName = "@lakes";
+      lakeFilter.Value = inputtedLakes;
+      cmd.Parameters.Add(lakeFilter);
+
+      MySqlParameter wildlifeFilter = new MySqlParameter();
+      wildlifeFilter.ParameterName = "@wildlife";
+      wildlifeFilter.Value = inputtedWildlife;
+      cmd.Parameters.Add(wildlifeFilter);
+
+      MySqlParameter wildlifeFilter = new MySqlParameter();
+      dogsFilter.ParameterName = "@dogs";
+      dogsFilter.Value = inputtedDogs;
+      cmd.Parameters.Add(dogsFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3;
+        bool TrailWaterfalls = rdr.GetBoolean(4);
+        bool TrailSummits = rdr.GetInt32(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool trailMountainViews = rdr.GetBoolean(7);
+        bool trailMeadows = rdr.GetBoolean(8);
+        bool trailLakes = rdr.GetBoolean(9);
+        bool TrailWildlife = rdr.GetBoolean(10);
+        bool TrailDogs = rdr.GetBoolean(11);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailWaterfalls, TrailSummits, trailStreams, trailMountainViews, trailMeadows, trailLakes, TrailWildlife, TrailDogs, TrailId);
+        allTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
     public override bool Equals(System.Object otherTrail)
     {
       if(!(otherTrail is Trail))
