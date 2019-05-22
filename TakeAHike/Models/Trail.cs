@@ -214,7 +214,7 @@ namespace TakeAHike.Models
         bool distanceEquality = this.GetDistance() == newTrail.GetDistance();
         bool waterfallsEquality = this.GetWaterfalls() == newTrail.GetWaterfalls();
         bool summitsEquality = this.GetSummits() == newTrail.GetSummits();
-        bool streamsEquality = this.GetSteams() == newTrail.GetSteams();
+        bool streamsEquality = this.GetStreams() == newTrail.GetStreams();
         bool mountainViewsEquality = this.GetMountainViews() == newTrail.GetMountainViews();
         bool meadowsEquality = this.GetMeadows() == newTrail.GetMeadows();
         bool lakesEquality = this.GetLakes() == newTrail.GetLakes();
@@ -249,7 +249,7 @@ namespace TakeAHike.Models
         readName = rdr.GetString(1);
         readDifficulty = rdr.GetInt32(2);
         readDistance = rdr.GetFloat(3);
-        readSummits = rdr.GetBoolean(4);
+        readSummits = rdr.GetInt32(4);
         readWaterfalls = rdr.GetBoolean(5);
         readStreams = rdr.GetBoolean(6);
         readMountainViews = rdr.GetBoolean(7);
@@ -257,7 +257,7 @@ namespace TakeAHike.Models
         readLakes = rdr.GetBoolean(9);
         readDogs = rdr.GetBoolean(10);
       }
-      Trail foundTrail = new Trail(readName, readDifficulty, readDistance, readSummits, readWaterfalls, readStreams, readMountainViews, readMountainViews, readMeadows, readLakes, readDogs, readId);
+      Trail foundTrail = new Trail(readName, readDifficulty, readDistance, readSummits, readWaterfalls, readStreams, readMountainViews, readMeadows, readLakes, readDogs, readId);
       return foundTrail;
     }
 

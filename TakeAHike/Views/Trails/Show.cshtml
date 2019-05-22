@@ -31,18 +31,20 @@
         <p>There are three or more view points</p>
       }
     <h6>Dogs Allowed?</h6>
-      @if(@Model.GetDogs() = "true")
+      @if(@Model.GetDogs() == true)
       {
         <p>Yes @Model.GetName() is a dog friendly trail!</p>
       }
-      @if(@Model.GetDogs() = "false")
+      @if(@Model.GetDogs() == false)
       {
         <p>Sorry, dogs not allowed on the @Model.GetName() trail.</p>
       }
       <h4>Features & Scenery of the @Model.GetName() hike: </h4>
         <ul>
-          @if(@Model.Get)
-          <li></li>
+          @if(@Model.GetWaterfalls() == true)
+          {
+          <li>This trail contains a beautiful waterfall</li>
+          }
         </ul>
 
 

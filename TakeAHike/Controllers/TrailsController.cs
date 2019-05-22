@@ -13,7 +13,7 @@ namespace TakeAHike.Controllers
       return View();
     }
 
-    [HttpGet("/trail/new")]
+    [HttpGet("/trails/new")]
     public ActionResult New()
     {
       return View();
