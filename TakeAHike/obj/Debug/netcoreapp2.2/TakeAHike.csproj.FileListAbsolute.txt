@@ -18,9 +18,6 @@
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Trails/Index.g.cshtml.cs
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Trails/New.g.cshtml.cs
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Trails/Show.g.cshtml.cs
-/Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Users/Index.g.cshtml.cs
-/Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Users/New.g.cshtml.cs
-/Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Users/Show.g.cshtml.cs
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/TakeAHike.RazorTargetAssemblyInfo.cache
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/TakeAHike.RazorTargetAssemblyInfo.cs
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/TakeAHike.Views.pdb
@@ -29,4 +26,7 @@
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/TakeAHike.csproj.CopyComplete
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Home/Index.g.cshtml.cs
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Trails/Find.g.cshtml.cs
-/Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Users/Edit.g.cshtml.cs
+/Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Hikers/Edit.g.cshtml.cs
+/Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Hikers/Index.g.cshtml.cs
+/Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Hikers/New.g.cshtml.cs
+/Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Hikers/Show.g.cshtml.cs
