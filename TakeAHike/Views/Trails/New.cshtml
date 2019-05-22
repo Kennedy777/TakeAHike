@@ -4,21 +4,17 @@
 @using TakeAHike.Models;
 @using TakeAHike;
 
-<<<<<<< HEAD
+<div class="container">
+  <div class="box">
   <div class="title-bar">
-    <h1>Create a New Trail</h1>
+    <h4>Find a Trail</h4>
   </div>
-=======
-@{
-  var trails = Model["trails"];
-}
 
-<div>
 
   <form action="/trails/create" method="post">
     <div class="form-group">
       <label for="name">Trail Name: </label>
-      <input class="form-control" type="text" name="name" value="@trails.name" required>
+      <input class="form-control" type="text" name="name" required>
     </div>
     <div class="form-group">
       <label for="difficulty">Trail Difficulty: </label>
@@ -32,7 +28,7 @@
     </div>
     <div>
       <label for="distance">Distance (in miles): </label>
-      <input class="form-control" type="float" name="distance" value="@trails.distance" required>
+      <input class="form-control" type="float" name="distance" required>
     </div>
     <div>
       <label for="waterfalls">Waterfalls: </label>
@@ -75,6 +71,5 @@
     </div>
 
   </form>
-
 </div>
->>>>>>> 1fcc9d90e5930e16646c1bae5ecf5202ba66d316
+</div>

@@ -149,11 +149,7 @@ namespace TakeAHike.Models
         bool TrailSummits = rdr.GetBoolean(3);
         bool TrailWaterfalls = rdr.GetBoolean(4);
         bool TrailWildlife = rdr.GetBoolean(5);
-<<<<<<< HEAD
-        int TrailDistance = rdr.GetInt32(6);
-=======
         float TrailDistance = rdr.GetFloat(6);
->>>>>>> 1fcc9d90e5930e16646c1bae5ecf5202ba66d316
         int TrailDifficulty = rdr.GetInt32(7);
 
         Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailWaterfalls, TrailSummits, TrailWildlife, TrailDogs, TrailId);

@@ -16,13 +16,12 @@
 
         <title>Take a Hike!</title>
   </head>
-  @* <body> *@
 
   <body style="height:1500px">
     <nav class="navbar navbar-inverse navbar-fixed-top">
 
-      <div class="container-fluid">
-        @* @RenderSection() *@
+      <div class="container">
+        @RenderBody()
         <div class="row">
           <div class="eleven columns" >
             <div class="navbar-header">
@@ -43,13 +42,13 @@
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hikers
               <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/users/CreateProfile">Sign Up</a></li>
-                <li><a href="/users/Login">Login</a></li>
-                <li><a href="/users">Find a Hiking Buddy</a></li>
+                <li><a href="/users/new">Sign Up</a></li>
+                <li><a href="/users">Login</a></li>
+                <li><a href="/users/show">View Profile</a></li>
               </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <h5 >Take a Hike!</h5>
+              <p class="navbar-text">TAKE A HIKE 2019</p>
             </ul>
           </div>
         </div>

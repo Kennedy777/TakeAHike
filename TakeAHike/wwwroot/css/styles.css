@@ -1,4 +1,7 @@
-
+.navbar {
+  min-height: 5%;
+  font-size: 15px;
+}
 body {
   background-image: url("/img/trail2.jpeg");
   height: 100%;
@@ -6,10 +9,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 
-}
-
-h5 {
-  color: white;
 }
 
 .title-bar {
@@ -20,6 +19,7 @@ h5 {
   right: 0%;
   background-color: forestgreen;
   border: 1px solid green;
+  min-height: 5%;
 
 }
 
@@ -31,7 +31,7 @@ h5 {
   left:10%;
   top: 10%;
   right: 10%;
-  bottom: 0%;
+  min-height: 10%;
 
 }
 
