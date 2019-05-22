@@ -17,12 +17,7 @@ namespace TakeAHike.Models
     private bool _lakes;
     private bool _dogs;
 
-<<<<<<< HEAD
     public Trail (string name, int difficulty, float distance, bool waterfalls, int summits, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id = 0)
-=======
-    public Trail (string name, int difficulty, float distance, bool waterfalls = false, bool summits = false, bool wildlife = false, bool dogs = false, int id = 0)
->>>>>>> 47aa07d5bc6bc1386b68636eaef40366912ad15a
-    {
       _name = name;
       _id = id;
       _difficulty = difficulty;
@@ -92,13 +87,9 @@ namespace TakeAHike.Models
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
-<<<<<<< HEAD
+
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, waterfalls, summits, streams, mountainViews, meadows, lakes, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailWaterfalls, @trailSummits, @trailWildlife, @trailDogs);";
-=======
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, waterfalls, summits, wildlife, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailWaterfalls, @trailSummits, @trailWildlife, @trailDogs);";
->>>>>>> 47aa07d5bc6bc1386b68636eaef40366912ad15a
 
       MySqlParameter trailName = new MySqlParameter();
       trailName.ParameterName = "@trailName";
