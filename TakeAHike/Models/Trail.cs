@@ -263,7 +263,7 @@ namespace TakeAHike.Models
         int TrailId = rdr.GetInt32(0);
         string TrailName = rdr.GetString(1);
         int TrailDifficulty = rdr.GetInt32(2);
-        float TrailDistance = rdr.GetFloat(3;
+        float TrailDistance = rdr.GetFloat(3);
         bool TrailWaterfalls = rdr.GetBoolean(4);
         bool TrailSummits = rdr.GetInt32(5);
         bool TrailStreams = rdr.GetBoolean(6);
