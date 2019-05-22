@@ -1,23 +1,20 @@
-<!DOCTYPE html>
+
 @{
   Layout = "_Layout";
 }
 @using TakeAHike.Models;
 @using TakeAHike;
-<html>
-<head>
-  <title>@Model.GetName()</title>
-</head>
 <body>
   <h1>Take A Hike!</h1>
   <div class="container">
+    <div class="box">
     <h2>Hike the @Model.GetName()</h2>
     <br>
     <h3>Trail Details: </h3>
     <br>
-    <h4>Difficulty: Level + "@Model.GetDifficulty()"</h4>
-    <h5>Total Distance: @Model.GetDistance()</h5>
-    <h5>View Points: </h5>
+    <h4>Difficulty: Level @Model.GetDifficulty()</h4>
+    <h5>Total Distance: @Model.GetDistance() miles</h5>
+    <h4>View Points: </h4>
       @if(@Model.GetSummits() == 1)
       {
         <p>There's only one summit</p>
@@ -30,24 +27,36 @@
       {
         <p>There are three or more view points</p>
       }
-    <h6>Dogs Allowed?</h6>
+    <h4>Dogs Allowed?</h4>
       @if(@Model.GetDogs() == true)
       {
         <p>Yes @Model.GetName() is a dog friendly trail!</p>
       }
       @if(@Model.GetDogs() == false)
       {
-        <p>Sorry, dogs not allowed on the @Model.GetName() trail.</p>
+        <p>Sorry, dogs not allowed on the @Model.GetName() trail</p>
       }
       <h4>Features & Scenery of the @Model.GetName() hike: </h4>
-        <ul>
-          @if(@Model.GetWaterfalls() == true)
-          {
-          <li>This trail contains a beautiful waterfall</li>
-          }
-        </ul>
 
+      <ul>
+        @if(@Model.GetWaterfalls() == true)
+        {
+          <li>@Model.GetName() contains a beautiful waterfall</li>
+        }
+         @if(@Model.GetStreams() == true)
+        {
+          <li>@Model.GetName() has a lovely stream</li>
+        }
+        @if(Model.GetMountainViews() == true)
+        {
+          <li>@Model.GetName() has many majestic mountain views</li>
+        }
+        @if(@Model.GetLakes() == true)
+        {
+          <li>@Model.GetName() is along a lake.</li>
+        }
+      </ul>
 
+    </div>
   </div>
 </body>
-</html>

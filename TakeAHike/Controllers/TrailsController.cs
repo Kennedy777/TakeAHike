@@ -19,12 +19,10 @@ namespace TakeAHike.Controllers
       return View();
     }
 
-    [HttpPost("/trails/create")]
-    public ActionResult Create()
+    [HttpGet("/trails/find")]
+    public ActionResult Find()
     {
-      Trails.Save();
-      Trails.GetAll();
-      return View("Show");
+      return View();
     }
 
   }
