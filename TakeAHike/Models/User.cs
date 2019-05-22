@@ -173,6 +173,51 @@ namespace TakeAHike.Models
       return allUsers;
     }
 
+    public static List<User> FilterUsers(inputtedGender, inputtedCar)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE gender = @gender AND car = @car;";
+
+      MySqlParameter difficultyFilter = new MySqlParameter();
+      difficultyFilter.ParameterName = "@difficulty";
+      difficultyFilter.Value = inputtedDifficulty;
+      cmd.Parameters.Add(difficultyFilter);
+
+      MySqlParameter distanceFilter = new MySqlParameter();
+      distanceFilter.ParameterName = "@distance";
+      distanceFilter.Value = inputtedDistance;
+      cmd.Parameters.Add(distanceFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3;
+        bool TrailWaterfalls = rdr.GetBoolean(4);
+        bool TrailSummits = rdr.GetInt32(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool trailMountainViews = rdr.GetBoolean(7);
+        bool trailMeadows = rdr.GetBoolean(8);
+        bool trailLakes = rdr.GetBoolean(9);
+        bool TrailWildlife = rdr.GetBoolean(10);
+        bool TrailDogs = rdr.GetBoolean(11);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailWaterfalls, TrailSummits, trailStreams, trailMountainViews, trailMeadows, trailLakes, TrailWildlife, TrailDogs, TrailId);
+        allTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
     public override bool Equals(System.Object otherUser)
     {
       if(!(otherUser is User))

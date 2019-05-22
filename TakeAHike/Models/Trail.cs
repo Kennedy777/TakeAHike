@@ -206,10 +206,6 @@ namespace TakeAHike.Models
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM trails WHERE difficulty = @difficulty AND distance = @distance AND waterfalls = @waterfalls AND summits = @summits AND streams = @streams AND mountainViews = @mountainViews AND meadows = @meadows AND lakes = @lakes AND wildlife = @wildlife AND dogs = @dogs;";
-      MySqlParameter thisId = new MySqlParameter();
-      thisId.ParameterName = "@trailId";
-      thisId.Value = this.GetId();
-      cmd.Parameters.Add(thisId);
 
       MySqlParameter difficultyFilter = new MySqlParameter();
       difficultyFilter.ParameterName = "@difficulty";
