@@ -1,0 +1,31 @@
+<h1>Edit User Info:</h1>
+
+<form action="users/@Model.GetId()/edit" method="post">
+
+  <label for="userName">User Name:</label>
+  <input type="test" id="userName" name="userName" placeholder="@Model.GetUserName()" required>
+
+  <label for="firstName">First Name:</label>
+  <input type="test" id="firstName" name="firstName" placeholder="@Model.GetFirstName()" required>
+
+  <label for="lastName">Last Name:</label>
+  <input type="test" id="lastName" name="lastName" placeholder="@Model.GetLastName()" required>
+
+  <label for="userZip">Zip Code:</label>
+  <input type="test" id="userZip" name="userZip" placeholder="@Model.GetZip()" required>
+
+  <label for="userPhone">Phone Number:</label>
+  <input type="test" id="userPhone" name="userPhone" placeholder="@Model.GetPhone()" required>
+
+  <label for="userEmail">Email Address:</label>
+  <input type="test" id="userEmail" name="userEmail" placeholder="@Model.GetEmail()" required>
+
+  <label for="usergender">Gender:</label>
+  <input type="test" id="usergender" name="usergender" placeholder="@Model.Getgender()" required>
+
+  <label for="userCar">Car Avaliblility:</label>
+  <input type="test" id="userCar" name="userCar" placeholder="@Model.GetCar()" required>
+
+</form>
+
+<p><a href="/">Home</a></p>

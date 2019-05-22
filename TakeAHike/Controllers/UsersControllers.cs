@@ -25,7 +25,21 @@ namespace TakeAHike.Controllers
       return View();
     }
 
-    
+    [HttpGet("/users/{userId}/edit")]
+    public ActionResult Edit(int userId)
+    {
+      User newUser = User.Find(userId);
+      return View(newUser);
+    }
+
+    [HttpPost("/users/{userId}/edit")]
+    public ActionResult Update(int userId, string userName, string firstName, string lastName, int zip, string phone, string email, int gender, int car)
+    {
+      User newUser = User.Find(userId);
+      newUser.Edit(string userName, string firstName, string lastName, int zip, string phone, string email, int gender, int car);
+      return RedirectToAction("Index");
+    }
+
 
     //This method creates a user and then returns the user to the Show page
     // [HttpPost("/users")]
