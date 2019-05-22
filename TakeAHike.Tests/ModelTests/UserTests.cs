@@ -91,5 +91,17 @@ namespace TakeAHike.Tests
       Assert.AreEqual(testUser, foundUser);
     }
 
+    [TestMethod]
+    public void GetFiltered_ReturnsSelectedUsersInDatabase_UserList()
+    {
+      User testUser1 = new User("Test Name1", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      testUser1.Save();
+      User testUser2 = new User("Test Name2", "first", "last", 98105, "(803)234-5554", "email@email.com", 2, 2);
+      testUser2.Save();
+      List<User> result = User.GetFiltered(1, 1);
+      List<User> testList = new List<User>{ testUser1 };
+      CollectionAssert.AreEqual(testList, result);
+    }
+
   }
 }

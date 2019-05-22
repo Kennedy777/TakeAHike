@@ -89,7 +89,7 @@ namespace TakeAHike.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, waterfalls, summits, streams, mountainViews, meadows, lakes, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailSummits, @trailWaterfalls, @trailStreams, @trailMountainViews, @trailMeadows, @trailLakes @trailDogs);";
+      cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, summits, waterfalls, streams, mountain_views, meadows, lakes, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailSummits, @trailWaterfalls, @trailStreams, @trailMountainViews, @trailMeadows, @trailLakes, @trailDogs);";
 
       MySqlParameter trailName = new MySqlParameter();
       trailName.ParameterName = "@trailName";
@@ -199,13 +199,13 @@ namespace TakeAHike.Models
       return allTrails;
     }
 
-    public static List<Trail> GetFiltered(int inputtedDifficulty, float inputtedDistance, bool inputtedWaterfalls, int inputtedSummits, bool inputtedStreams, bool inputtedMountainViews, bool inputtedMeadows, bool inputtedLakes, bool inputtedWildlife, bool inputtedDogs)
+    public static List<Trail> GetFiltered(int inputtedDifficulty, float inputtedDistance, int inputtedSummits, bool inputtedWaterfalls, bool inputtedStreams, bool inputtedMountainViews, bool inputtedMeadows, bool inputtedLakes, bool inputtedDogs)
     {
       List<Trail> filteredTrails = new List<Trail>{};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM trails WHERE difficulty = @difficulty AND distance = @distance AND waterfalls = @waterfalls AND summits = @summits AND streams = @streams AND mountainViews = @mountainViews AND meadows = @meadows AND lakes = @lakes AND dogs = @dogs;";
+      cmd.CommandText = @"SELECT * FROM trails WHERE difficulty = @difficulty AND distance = @distance AND waterfalls = @waterfalls AND summits = @summits AND streams = @streams AND mountain_views = @mountainViews AND meadows = @meadows AND lakes = @lakes AND dogs = @dogs;";
 
       MySqlParameter difficultyFilter = new MySqlParameter();
       difficultyFilter.ParameterName = "@difficulty";
@@ -265,8 +265,359 @@ namespace TakeAHike.Models
         bool TrailMountainViews = rdr.GetBoolean(7);
         bool TrailMeadows = rdr.GetBoolean(8);
         bool TrailLakes = rdr.GetBoolean(9);
-        bool TrailWildlife = rdr.GetBoolean(10);
-        bool TrailDogs = rdr.GetBoolean(11);
+        bool TrailDogs = rdr.GetBoolean(10);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
+        filteredTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
+    public static List<Trail> FilterByDifficulty(int difficulty)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE difficulty = @difficulty;";
+
+      MySqlParameter difficultyFilter = new MySqlParameter();
+      difficultyFilter.ParameterName = "@difficulty";
+      difficultyFilter.Value = difficulty;
+      cmd.Parameters.Add(difficultyFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3);
+        int TrailSummits = rdr.GetInt32(4);
+        bool TrailWaterfalls = rdr.GetBoolean(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool TrailMountainViews = rdr.GetBoolean(7);
+        bool TrailMeadows = rdr.GetBoolean(8);
+        bool TrailLakes = rdr.GetBoolean(9);
+        bool TrailDogs = rdr.GetBoolean(10);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
+        filteredTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
+
+    public static List<Trail> FilterByDistance(float distance)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE distance = @distance;";
+
+      MySqlParameter distanceFilter = new MySqlParameter();
+      distanceFilter.ParameterName = "@distance";
+      distanceFilter.Value = distance;
+      cmd.Parameters.Add(distanceFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3);
+        int TrailSummits = rdr.GetInt32(4);
+        bool TrailWaterfalls = rdr.GetBoolean(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool TrailMountainViews = rdr.GetBoolean(7);
+        bool TrailMeadows = rdr.GetBoolean(8);
+        bool TrailLakes = rdr.GetBoolean(9);
+        bool TrailDogs = rdr.GetBoolean(10);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
+        filteredTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
+    public static List<Trail> FilterBySummits(int summits)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE summits = @summits;";
+
+      MySqlParameter summitsFilter = new MySqlParameter();
+      summitsFilter.ParameterName = "@summits";
+      summitsFilter.Value = summits;
+      cmd.Parameters.Add(summitsFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3);
+        int TrailSummits = rdr.GetInt32(4);
+        bool TrailWaterfalls = rdr.GetBoolean(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool TrailMountainViews = rdr.GetBoolean(7);
+        bool TrailMeadows = rdr.GetBoolean(8);
+        bool TrailLakes = rdr.GetBoolean(9);
+        bool TrailDogs = rdr.GetBoolean(10);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
+        filteredTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
+    public static List<Trail> FilterByWaterfalls(bool waterfalls)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE waterfalls = @waterfalls;";
+
+      MySqlParameter waterfallsFilter = new MySqlParameter();
+      waterfallsFilter.ParameterName = "@waterfalls";
+      waterfallsFilter.Value = waterfalls;
+      cmd.Parameters.Add(waterfallsFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3);
+        int TrailSummits = rdr.GetInt32(4);
+        bool TrailWaterfalls = rdr.GetBoolean(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool TrailMountainViews = rdr.GetBoolean(7);
+        bool TrailMeadows = rdr.GetBoolean(8);
+        bool TrailLakes = rdr.GetBoolean(9);
+        bool TrailDogs = rdr.GetBoolean(10);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
+        filteredTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
+    public static List<Trail> FilterByStreams(bool streams)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE streams = @streams;";
+
+      MySqlParameter streamsFilter = new MySqlParameter();
+      streamsFilter.ParameterName = "@streams";
+      streamsFilter.Value = streams;
+      cmd.Parameters.Add(streamsFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3);
+        int TrailSummits = rdr.GetInt32(4);
+        bool TrailWaterfalls = rdr.GetBoolean(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool TrailMountainViews = rdr.GetBoolean(7);
+        bool TrailMeadows = rdr.GetBoolean(8);
+        bool TrailLakes = rdr.GetBoolean(9);
+        bool TrailDogs = rdr.GetBoolean(10);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
+        filteredTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
+    public static List<Trail> FilterByMountainViews(bool mountainViews)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE mountain_views = @mountainViews;";
+
+      MySqlParameter mountainViewsFilter = new MySqlParameter();
+      mountainViewsFilter.ParameterName = "@mountainViews";
+      mountainViewsFilter.Value = mountainViews;
+      cmd.Parameters.Add(mountainViewsFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3);
+        int TrailSummits = rdr.GetInt32(4);
+        bool TrailWaterfalls = rdr.GetBoolean(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool TrailMountainViews = rdr.GetBoolean(7);
+        bool TrailMeadows = rdr.GetBoolean(8);
+        bool TrailLakes = rdr.GetBoolean(9);
+        bool TrailDogs = rdr.GetBoolean(10);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
+        filteredTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
+    public static List<Trail> FilterByMeadows(bool meadows)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE meadows = @meadows;";
+
+      MySqlParameter meadowsFilter = new MySqlParameter();
+      meadowsFilter.ParameterName = "@meadows";
+      meadowsFilter.Value = meadows;
+      cmd.Parameters.Add(meadowsFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3);
+        int TrailSummits = rdr.GetInt32(4);
+        bool TrailWaterfalls = rdr.GetBoolean(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool TrailMountainViews = rdr.GetBoolean(7);
+        bool TrailMeadows = rdr.GetBoolean(8);
+        bool TrailLakes = rdr.GetBoolean(9);
+        bool TrailDogs = rdr.GetBoolean(10);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
+        filteredTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
+    public static List<Trail> FilterByLakes(bool lakes)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE lakes = @lakes;";
+
+      MySqlParameter lakesFilter = new MySqlParameter();
+      lakesFilter.ParameterName = "@lakes";
+      lakesFilter.Value = lakes;
+      cmd.Parameters.Add(lakesFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3);
+        int TrailSummits = rdr.GetInt32(4);
+        bool TrailWaterfalls = rdr.GetBoolean(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool TrailMountainViews = rdr.GetBoolean(7);
+        bool TrailMeadows = rdr.GetBoolean(8);
+        bool TrailLakes = rdr.GetBoolean(9);
+        bool TrailDogs = rdr.GetBoolean(10);
+
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
+        filteredTrails.Add(newTrail);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return filteredTrails;
+    }
+
+    public static List<Trail> FilterByDogs(bool dogs)
+    {
+      List<Trail> filteredTrails = new List<Trail>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM trails WHERE dogs = @dogs;";
+
+      MySqlParameter dogsFilter = new MySqlParameter();
+      dogsFilter.ParameterName = "@dogs";
+      dogsFilter.Value = dogs;
+      cmd.Parameters.Add(dogsFilter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int TrailId = rdr.GetInt32(0);
+        string TrailName = rdr.GetString(1);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3);
+        int TrailSummits = rdr.GetInt32(4);
+        bool TrailWaterfalls = rdr.GetBoolean(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool TrailMountainViews = rdr.GetBoolean(7);
+        bool TrailMeadows = rdr.GetBoolean(8);
+        bool TrailLakes = rdr.GetBoolean(9);
+        bool TrailDogs = rdr.GetBoolean(10);
 
         Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
         filteredTrails.Add(newTrail);

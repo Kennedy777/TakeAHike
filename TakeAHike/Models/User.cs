@@ -173,13 +173,13 @@ namespace TakeAHike.Models
       return allUsers;
     }
 
-    public static List<User> FilterUsers(int inputtedGender, int inputtedCar)
+    public static List<User> GetFiltered(int inputtedGender, int inputtedCar)
     {
       List<User> filteredUsers = new List<User>{};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM trails WHERE gender = @gender AND car = @car;";
+      cmd.CommandText = @"SELECT * FROM users WHERE gender = @gender AND car = @car;";
 
       MySqlParameter genderFilter = new MySqlParameter();
       genderFilter.ParameterName = "@gender";
