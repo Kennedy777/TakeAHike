@@ -17,7 +17,8 @@ namespace TakeAHike.Models
     private bool _lakes;
     private bool _dogs;
 
-    public Trail (string name, int difficulty, float distance, bool waterfalls, int summits, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id = 0)
+    public Trail (string name, int difficulty, float distance, int summits, bool waterfalls, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id = 0)
+    {
       _name = name;
       _id = id;
       _difficulty = difficulty;
@@ -87,9 +88,8 @@ namespace TakeAHike.Models
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
-
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, waterfalls, summits, streams, mountainViews, meadows, lakes, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailWaterfalls, @trailSummits, @trailWildlife, @trailDogs);";
+      cmd.CommandText = @"INSERT INTO trails (name, difficulty, distance, waterfalls, summits, streams, mountainViews, meadows, lakes, dogs) VALUES (@trailName, @trailDifficulty, @trailDistance, @trailSummits, @trailWaterfalls, @trailStreams, @trailMountainViews, @trailMeadows, @trailLakes @trailDogs);";
 
       MySqlParameter trailName = new MySqlParameter();
       trailName.ParameterName = "@trailName";
@@ -178,14 +178,17 @@ namespace TakeAHike.Models
       {
         int TrailId = rdr.GetInt32(0);
         string TrailName = rdr.GetString(1);
-        bool TrailSummits = rdr.GetBoolean(3);
-        bool TrailWaterfalls = rdr.GetBoolean(4);
-        bool TrailWildlife = rdr.GetBoolean(5);
-        float TrailDistance = rdr.GetFloat(6);
-        int TrailDifficulty = rdr.GetInt32(7);
-        bool TrailDogs = rdr.GetBoolean(9);
+        int TrailDifficulty = rdr.GetInt32(2);
+        float TrailDistance = rdr.GetFloat(3);
+        int TrailSummits = rdr.GetInt32(4);
+        bool TrailWaterfalls = rdr.GetBoolean(5);
+        bool TrailStreams = rdr.GetBoolean(6);
+        bool TrailMountainViews = rdr.GetBoolean(7);
+        bool TrailMeadows = rdr.GetBoolean(8);
+        bool TrailLakes = rdr.GetBoolean(9);
+        bool TrailDogs = rdr.GetBoolean(10);
 
-        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailWaterfalls, TrailSummits, TrailWildlife, TrailDogs, TrailId);
+        Trail newTrail = new Trail(TrailName, TrailDifficulty, TrailDistance, TrailSummits, TrailWaterfalls, TrailStreams, TrailMountainViews, TrailMeadows, TrailLakes, TrailDogs, TrailId);
         allTrails.Add(newTrail);
       }
       conn.Close();
@@ -300,9 +303,12 @@ namespace TakeAHike.Models
         bool distanceEquality = this.GetDistance() == newTrail.GetDistance();
         bool waterfallsEquality = this.GetWaterfalls() == newTrail.GetWaterfalls();
         bool summitsEquality = this.GetSummits() == newTrail.GetSummits();
-        bool wildlifeEquality = this.GetWildlife() == newTrail.GetWildlife();
+        bool streamsEquality = this.GetSteams() == newTrail.GetSteams();
+        bool mountainViewsEquality = this.GetMountainViews() == newTrail.GetMountainViews();
+        bool meadowsEquality = this.GetMeadows() == newTrail.GetMeadows();
+        bool lakesEquality = this.GetLakes() == newTrail.GetLakes();
         bool dogsEquality = this.GetDogs() == newTrail.GetDogs();
-        return (idEquality && nameEquality && difficultyEquality && distanceEquality && waterfallsEquality && summitsEquality && wildlifeEquality && dogsEquality);
+        return (idEquality && nameEquality && difficultyEquality && distanceEquality && waterfallsEquality && summitsEquality && streamsEquality && mountainViewsEquality && lakesEquality && meadowsEquality && dogsEquality);
       }
     }
 
@@ -317,24 +323,30 @@ namespace TakeAHike.Models
       MySqlDataReader rdr = cmd .ExecuteReader() as MySqlDataReader;
       int readId = 0;
       string readName = "";
-      bool readDogs = false;
-      bool readSummits = false;
-      bool readWaterfalls = false;
-      bool readWildlife = false;
-      float readDistance = 0;
       int readDifficulty = 0;
+      float readDistance = 0;
+      int readSummits = 0;
+      bool readWaterfalls = false;
+      bool readStreams = false;
+      bool readMountainViews = false;
+      bool readMeadows = false;
+      bool readLakes = false;
+      bool readDogs = false;
       while(rdr.Read())
       {
         readId = rdr.GetInt32(0);
         readName = rdr.GetString(1);
-        readDogs = rdr.GetBoolean(2);
-        readSummits = rdr.GetBoolean(3);
-        readWaterfalls = rdr.GetBoolean(4);
-        readWildlife = rdr.GetBoolean(5);
-        readDistance = rdr.GetFloat(6);
-        readDifficulty = rdr.GetInt32(7);
+        readDifficulty = rdr.GetInt32(2);
+        readDistance = rdr.GetFloat(3);
+        readSummits = rdr.GetBoolean(4);
+        readWaterfalls = rdr.GetBoolean(5);
+        readStreams = rdr.GetBoolean(6);
+        readMountainViews = rdr.GetBoolean(7);
+        readMeadows = rdr.GetBoolean(8);
+        readLakes = rdr.GetBoolean(9);
+        readDogs = rdr.GetBoolean(10);
       }
-      Trail foundTrail = new Trail(readName, readDifficulty, readDistance, readWaterfalls, readSummits, readWildlife, readDogs, readId);
+      Trail foundTrail = new Trail(readName, readDifficulty, readDistance, readSummits, readWaterfalls, readStreams, readMountainViews, readMountainViews, readMeadows, readLakes, readDogs, readId);
       return foundTrail;
     }
 
