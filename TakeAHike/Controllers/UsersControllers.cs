@@ -25,6 +25,8 @@ namespace TakeAHike.Controllers
       return View();
     }
 
+    
+
     //This method creates a user and then returns the user to the Show page
     // [HttpPost("/users")]
     // public ActionResult Create(string userName, string firstName, string lastName, string phone, string email, string gender, string car, int id)
