@@ -19,5 +19,11 @@ namespace TakeAHike.Controllers
       return View();
     }
 
+    [HttpGet("/trails/find")]
+    public ActionResult Find()
+    {
+      return View();
+    }
+
   }
 }

@@ -7,15 +7,11 @@
 <div class="container">
   <div class="box">
   <div class="title-bar">
-    <h4>Add a New Trail to Database</h4>
+    <h4>Enter preferred trail criteria</h4>
   </div>
 
 
-  <form action="/trails/create" method="post">
-    <div class="form-group">
-      <label for="name">Trail Name: </label>
-      <input class="form-control" type="text" name="name" required>
-    </div>
+  <form action="/trails/find" method="post">
     <div class="form-group">
       <label for="difficulty">Trail Difficulty: </label>
       <select class="form-control" name="difficulty" required>
@@ -28,18 +24,18 @@
     </div>
     <div>
       <label for="distance">Distance (in miles): </label>
-      <input class="form-control" type="float" name="distance" required>
+      <input class="form-control" type="float" name="distance" >
     </div>
     <div>
       <label for="waterfalls">Waterfalls: </label>
-      <select class="form-control" name="waterfalls" required>
+      <select class="form-control" name="waterfalls" >
         <option value="1">Yes</option>
         <option value="0">No</option>
       </select>
     </div>
     <div>
       <label for="summits">View Points</label>
-      <select class="form-control" name="summits" required>
+      <select class="form-control" name="summits" >
         <option value="1">Summit Only</option>
         <option value="2">Two View Points</option>
         <option value="3">Three or more View Points</option>
@@ -48,13 +44,13 @@
 
     <div class="form-group">
       <h5>Wildlife/Scenery (select all that apply): </h5>
-        <input type="checkbox" name="streams" value="streams">
+        <input type="checkbox" name="streams" value="1">
         <label for="streams">Streams/Rivers</label>
-        <input type="checkbox" name="mountainViews" value="mountainViews">
+        <input type="checkbox" name="mountainViews" value="1">
         <label for="mountainViews">Mountain Views</label>
-        <input type="checkbox" name="meadows" value="meadows">
+        <input type="checkbox" name="meadows" value="1">
         <label for="meadows">Meadows</label>
-        <input type="checkbox" name="lakes" value="lakes">
+        <input type="checkbox" name="lakes" value="1">
         <label for="lakes">Lakes</label>
         @* <input type="checkbox" name="waterfalls" value="waterfalls">
         <label for="meadows">Waterfalls</label>
@@ -68,7 +64,7 @@
         <option value="0">No</option>
       </select>
     </div>
-    <button type="submit" class="btn btn-info">Add Trail</button>
+    <button type="submit" class="btn btn-info">Find Your Trail</button>
 
   </form>
 </div>

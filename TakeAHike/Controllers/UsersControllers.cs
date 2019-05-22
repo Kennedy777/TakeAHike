@@ -19,12 +19,18 @@ namespace TakeAHike.Controllers
       return View();
     }
 
-    //This method creates a user and then returns the user to the Show page
-    [HttpPost("/users")]
-    public ActionResult Create(string userName, string firstName, string lastName, string phone, string email, string gender, string car, int id)
+    [HttpGet("/users/show")]
+    public ActionResult Show()
     {
-      return RedirectToAction("Show");
+      return View();
     }
+
+    //This method creates a user and then returns the user to the Show page
+    // [HttpPost("/users")]
+    // public ActionResult Create(string userName, string firstName, string lastName, string phone, string email, string gender, string car, int id)
+    // {
+    //   return RedirectToAction("Show");
+    // }
 
     // [HttpPost("/users/{userId}/trails")]
     // public ActionResult Create(string userName, int trailId, int id)
