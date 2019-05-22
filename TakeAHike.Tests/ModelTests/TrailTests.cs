@@ -10,7 +10,7 @@ namespace TakeAHike.Tests
   {
     public TrailTest()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=takeahike_test;";
+      DBConfiguration.ConnectionString = "server=localhost;hiker id=root;password=root;port=8889;database=takeahike_test;";
     }
 
     public void Dispose()
@@ -104,14 +104,14 @@ namespace TakeAHike.Tests
     }
 
     [TestMethod]
-    public void AddTrail_AddsTrailToUser_TrailList()
+    public void AddTrail_AddsTrailToHiker_TrailList()
     {
       Trail testTrail = new Trail("TrailName1", 1, 2.5f, 3, true, true, true, true, true, true);
       testTrail.Save();
-      User testUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-      testUser.Save();
-      testUser.AddTrail(testTrail);
-      List<Trail> result = testUser.GetTrails();
+      Hiker testHiker = new Hiker("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      testHiker.Save();
+      testHiker.AddTrail(testTrail);
+      List<Trail> result = testHiker.GetTrails();
       List<Trail> testList = new List<Trail>{ testTrail };
       CollectionAssert.AreEqual(testList, result);
     }

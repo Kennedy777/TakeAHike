@@ -29,3 +29,4 @@
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/TakeAHike.csproj.CopyComplete
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Home/Index.g.cshtml.cs
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Trails/Find.g.cshtml.cs
+/Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Users/Edit.g.cshtml.cs

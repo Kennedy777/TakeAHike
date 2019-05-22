@@ -13,10 +13,10 @@
 
 
 
-    <form action="/users/create" method="post">
+    <form action="/hikers/create" method="post">
       <div class= "form-group">
-        <label for="userName">User Name</label>
-        <input class = "form-control" type="text" name="userName" >
+        <label for="hikerName">User Name</label>
+        <input class = "form-control" type="text" name="hikerName" >
         <label for="password">Password</label>
         <input class = "form-control" type="password" name="password" >
       </div>
@@ -65,11 +65,11 @@
 
     </form>
     <button id = "delete" class="btn btn-danger" type="button" name="delete">Delete Profile</button>
-    <form class="hidden-button" action="/user/delete" method="post">
+    <form class="hidden-button" action="/hiker/delete" method="post">
       <input type="hidden" name="_method" value="DELETE">
       <button type="submit" class="btn btn-danger">Confirm</button>
     </form>
-    <button class="hidden-button btn btn-info" type="button" name="button"><a href="/user/delete/cancel">Cancel</a></button>
+    <button class="hidden-button btn btn-info" type="button" name="button"><a href="/hiker/delete/cancel">Cancel</a></button>
 
   </div>
 

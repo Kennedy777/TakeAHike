@@ -6,112 +6,112 @@ using System;
 namespace TakeAHike.Tests
 {
   [TestClass]
-  public class UserTest : IDisposable
+  public class HikerTest : IDisposable
   {
-    public UserTest()
+    public HikerTest()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=takeahike_test;";
+      DBConfiguration.ConnectionString = "server=localhost;hiker id=root;password=root;port=8889;database=takeahike_test;";
     }
 
     public void Dispose()
     {
-      User.ClearAll();
+      Hiker.ClearAll();
     }
 
     [TestMethod]
-    public void UserConstructor_CreatesNewInstanceOfObject_User()
+    public void HikerConstructor_CreatesNewInstanceOfObject_Hiker()
     {
-    User newUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-    Assert.AreEqual(typeof(User), newUser.GetType());
+    Hiker newHiker = new Hiker("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+    Assert.AreEqual(typeof(Hiker), newHiker.GetType());
     }
 
     [TestMethod]
-    public void GetUserName_ReturnsUserName_String()
+    public void GetHikerName_ReturnsHikerName_String()
     {
       string name = "Test Name";
-      User newUser = new User(name, "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-      string result = newUser.GetUserName();
+      Hiker newHiker = new Hiker(name, "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      string result = newHiker.GetHikerName();
       Assert.AreEqual(name, result);
     }
 
     [TestMethod]
-    public void Save_SavesUserToDatabase_UserList()
+    public void Save_SavesHikerToDatabase_HikerList()
     {
-      User testUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-      testUser.Save();
-      List<User> result = User.GetAll();
-      List<User> testList = new List<User>{testUser};
+      Hiker testHiker = new Hiker("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      testHiker.Save();
+      List<Hiker> result = Hiker.GetAll();
+      List<Hiker> testList = new List<Hiker>{testHiker};
       CollectionAssert.AreEqual(testList, result);
     }
 
     [TestMethod]
-    public void Save_DatabaseAssignsIdToUser_Id()
+    public void Save_DatabaseAssignsIdToHiker_Id()
     {
-      User testUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-      testUser.Save();
-      User savedUser = User.GetAll()[0];
-      int result = savedUser.GetId();
-      int testId = testUser.GetId();
+      Hiker testHiker = new Hiker("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      testHiker.Save();
+      Hiker savedHiker = Hiker.GetAll()[0];
+      int result = savedHiker.GetId();
+      int testId = testHiker.GetId();
       Assert.AreEqual(testId, result);
     }
 
     [TestMethod]
-    public void Equals_ReturnsTrueIfPropertiesAreTheSame_User()
+    public void Equals_ReturnsTrueIfPropertiesAreTheSame_Hiker()
     {
-      User testUser1 = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-      User testUser2 = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-      Assert.AreEqual(testUser1, testUser2);
+      Hiker testHiker1 = new Hiker("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      Hiker testHiker2 = new Hiker("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      Assert.AreEqual(testHiker1, testHiker2);
     }
 
     [TestMethod]
-    public void GetAll_UsersStartEmpty_UserList()
+    public void GetAll_HikersStartEmpty_HikerList()
     {
-      int result = User.GetAll().Count;
+      int result = Hiker.GetAll().Count;
       Assert.AreEqual(0, result);
     }
 
     [TestMethod]
-    public void GetAll_ReturnsAllUsers_UserList()
+    public void GetAll_ReturnsAllHikers_HikerList()
     {
-      User testUser1 = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-      User testUser2 = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-      testUser1.Save();
-      testUser2.Save();
-      List<User> result = User.GetAll();
-      List<User> newList = new List<User> { testUser1, testUser2 };
+      Hiker testHiker1 = new Hiker("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      Hiker testHiker2 = new Hiker("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      testHiker1.Save();
+      testHiker2.Save();
+      List<Hiker> result = Hiker.GetAll();
+      List<Hiker> newList = new List<Hiker> { testHiker1, testHiker2 };
       CollectionAssert.AreEqual(result, newList);
     }
 
     [TestMethod]
-    public void Find_ReturnsUserInDataBase_User()
+    public void Find_ReturnsHikerInDataBase_Hiker()
     {
-      User testUser = new User("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-      testUser.Save();
-      User foundUser = User.Find(testUser.GetId());
-      Assert.AreEqual(testUser, foundUser);
+      Hiker testHiker = new Hiker("Test Name", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      testHiker.Save();
+      Hiker foundHiker = Hiker.Find(testHiker.GetId());
+      Assert.AreEqual(testHiker, foundHiker);
     }
 
     [TestMethod]
-    public void GetFiltered_ReturnsSelectedUsersInDatabase_UserList()
+    public void GetFiltered_ReturnsSelectedHikersInDatabase_HikerList()
     {
-      User testUser1 = new User("Test Name1", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
-      testUser1.Save();
-      User testUser2 = new User("Test Name2", "first", "last", 98105, "(803)234-5554", "email@email.com", 2, 2);
-      testUser2.Save();
-      List<User> result = User.GetFiltered(1, 1);
-      List<User> testList = new List<User>{ testUser1 };
+      Hiker testHiker1 = new Hiker("Test Name1", "first", "last", 98105, "(803)234-5554", "email@email.com", 1, 1);
+      testHiker1.Save();
+      Hiker testHiker2 = new Hiker("Test Name2", "first", "last", 98105, "(803)234-5554", "email@email.com", 2, 2);
+      testHiker2.Save();
+      List<Hiker> result = Hiker.GetFiltered(1, 1);
+      List<Hiker> testList = new List<Hiker>{ testHiker1 };
       CollectionAssert.AreEqual(testList, result);
     }
 
     [TestMethod]
-    public void Edit_EditsUserName_String()
+    public void Edit_EditsHikerName_String()
     {
       string Name1 = "Test1";
-      User testUser = new User(Name1, "first", "last", 98105, "(803)234-5554", "email@email.com", 2, 2);
-      testUser.Save();
+      Hiker testHiker = new Hiker(Name1, "first", "last", 98105, "(803)234-5554", "email@email.com", 2, 2);
+      testHiker.Save();
       string Name2 = "Test2";
-      testUser.Edit(Name2, "first", "last", 98105, "(803)234-5554", "email@email.com", 2, 2);
-      string result = User.Find(testUser.GetId()).GetUserName();
+      testHiker.Edit(Name2, "first", "last", 98105, "(803)234-5554", "email@email.com", 2, 2);
+      string result = Hiker.Find(testHiker.GetId()).GetHikerName();
       Assert.AreEqual(Name2, result);
     }
 

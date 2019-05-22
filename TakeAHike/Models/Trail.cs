@@ -697,7 +697,7 @@ namespace TakeAHike.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM trails WHERE id = @trailsId; DELETE FROM users_trails WHERE trail_id = @trailId;";
+      cmd.CommandText = @"DELETE FROM trails WHERE id = @trailsId; DELETE FROM hikers_trails WHERE trail_id = @trailId;";
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "@trailId";
       thisId.Value = this.GetId();
@@ -709,39 +709,39 @@ namespace TakeAHike.Models
       }
     }
 
-    public List<User> GetUsers()
+    public List<Hiker> GetHikers()
     {
-      List<User> allUsers = new List<User>();
+      List<Hiker> allHikers = new List<Hiker>();
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT users.* FROM trails
-        JOIN users_trails ON (trails.id = users_trails.trail_id)
-        JOIN users ON (users_trails.user_id = users.id)
+      cmd.CommandText = @"SELECT hikers.* FROM trails
+        JOIN hikers_trails ON (trails.id = hikers_trails.trail_id)
+        JOIN hikers ON (hikers_trails.hiker_id = hikers.id)
         WHERE trails.id = @trailId;";
       MySqlParameter trailId = new MySqlParameter("@trailId", _id);
       cmd.Parameters.Add(trailId);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        int UserId = rdr.GetInt32(0);
-        string UserUserName = rdr.GetString(1);
-        string UserFirstName = rdr.GetString(2);
-        string UserLastName = rdr.GetString(3);
-        int UserZip = rdr.GetInt32(4);
-        string UserPhone = rdr.GetString(5);
-        string UserEmail = rdr.GetString(6);
-        int UserGender = rdr.GetInt32(7);
-        int UserCar = rdr.GetInt32(8);
-        User newUser = new User(UserUserName, UserFirstName, UserLastName, UserZip, UserPhone, UserEmail, UserGender, UserCar, UserId);
-        allUsers.Add(newUser);
+        int HikerId = rdr.GetInt32(0);
+        string HikerHikerName = rdr.GetString(1);
+        string HikerFirstName = rdr.GetString(2);
+        string HikerLastName = rdr.GetString(3);
+        int HikerZip = rdr.GetInt32(4);
+        string HikerPhone = rdr.GetString(5);
+        string HikerEmail = rdr.GetString(6);
+        int HikerGender = rdr.GetInt32(7);
+        int HikerCar = rdr.GetInt32(8);
+        Hiker newHiker = new Hiker(HikerHikerName, HikerFirstName, HikerLastName, HikerZip, HikerPhone, HikerEmail, HikerGender, HikerCar, HikerId);
+        allHikers.Add(newHiker);
       }
       conn.Close();
       if(conn != null)
       {
        conn.Dispose();
       }
-      return allUsers;
+      return allHikers;
     }
 
   }

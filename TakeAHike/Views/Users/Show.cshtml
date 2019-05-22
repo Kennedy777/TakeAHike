@@ -10,20 +10,20 @@
       <h4>View Profile</h4>
     </div>
 
-      @* @foreach (User user in Model)
+      @* @foreach (User hiker in Model)
       {
         <tr>
-          <td><a href='/users/@user.GetId()'>@user.GetFirstName() @user.GetLastName()</a></td>
-          <td>@user.GetPhone()</td>
+          <td><a href='/hikers/@hiker.GetId()'>@hiker.GetFirstName() @hiker.GetLastName()</a></td>
+          <td>@hiker.GetPhone()</td>
         </tr>
       }
       </table>
     } *@
     <nav class="bottom">
-      <a href="/users/new"><button type="button">Create a user account</button></a>
-      <a href="/users"><button type="button">Log In</button></a>
-      <a href='/users/@Model["user"].GetId()/edit'><button type="button">Edit Profile</button></a>
-      <a href='/users/@Model["user"].GetId()/delete'><button type="button">Delete Profile</button></a>
+      <a href="/hikers/new"><button type="button">Create a hiker account</button></a>
+      <a href="/hikers"><button type="button">Log In</button></a>
+      <a href='/hikers/@Model["hiker"].GetId()/edit'><button type="button">Edit Profile</button></a>
+      <a href='/hikers/@Model["hiker"].GetId()/delete'><button type="button">Delete Profile</button></a>
     </nav>
   </div>
 </div>
