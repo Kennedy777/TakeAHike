@@ -19,11 +19,19 @@ namespace TakeAHike.Controllers
       return View();
     }
 
+    [HttpPost("/trails/create")]
+    public ActionResult Create(string name, int difficulty, float distance, int summits, bool waterfalls, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id)
+    {
+      Trail newTrail = new Trail(name, difficulty, distance, summits, waterfalls, streams, mountainViews, meadows, lakes, dogs);
+      newTrail.Save();
+      Trail.GetAll();
+      return View("Show", newTrail);
+    }
+
     [HttpGet("/trails/find")]
     public ActionResult Find()
     {
       return View();
     }
-
   }
 }

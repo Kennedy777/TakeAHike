@@ -68,15 +68,15 @@ namespace TakeAHike.Models
     }
     public bool GetMountainViews()
     {
-      return _streams;
+      return _mountainViews;
     }
     public bool GetMeadows()
     {
-      return _streams;
+      return _meadows;
     }
     public bool GetLakes()
     {
-      return _streams;
+      return _lakes;
     }
 
     public bool GetDogs()
