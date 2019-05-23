@@ -20,9 +20,9 @@ namespace TakeAHike.Controllers
     }
 
     [HttpPost("/trails/create")]
-    public ActionResult Create(string name, int difficulty, float distance, int summits, bool waterfalls, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id)
+    public ActionResult Create(string name, int difficulty, int summits, bool waterfalls, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id)
     {
-      Trail newTrail = new Trail(name, difficulty, distance, summits, waterfalls, streams, mountainViews, meadows, lakes, dogs);
+      Trail newTrail = new Trail(name, difficulty, summits, waterfalls, streams, mountainViews, meadows, lakes, dogs);
       newTrail.Save();
       Trail.GetAll();
       return View("Show", newTrail);
