@@ -30,3 +30,4 @@
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Hikers/Index.g.cshtml.cs
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Hikers/New.g.cshtml.cs
 /Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Hikers/Show.g.cshtml.cs
+/Users/Guest/Desktop/TakeAHike/TakeAHike/obj/Debug/netcoreapp2.2/Razor/Views/Trails/Results.g.cshtml.cs

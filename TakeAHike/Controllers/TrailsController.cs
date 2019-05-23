@@ -27,6 +27,13 @@ namespace TakeAHike.Controllers
       Trail.GetAll();
       return View("Show", newTrail);
     }
+    [HttpGet("/trails/find")]
+    public ActionResult Show(int id)
+    {
+      Trail foundTrail = Trail.Find(id);
+      foundTrail.Save();
+      return View(foundTrail);
+    }
 
     [HttpGet("/trails/find")]
     public ActionResult Find()
