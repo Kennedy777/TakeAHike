@@ -11,7 +11,7 @@
 
   <div class="form-box">
     <div class="form-group">
-    <form action="/trails/find" method="post">
+    <form action="/trails/results" method="get">
         <b><label for="difficulty"><h4>Trail Difficulty: </h4></label>
         <p>Factors such as elevation and trail quality increase difficulty.</p>
         <input type="radio" name="difficulty" value="1">Level 1 (easy)</option><br>
@@ -19,29 +19,48 @@
         <input type="radio" name="difficulty" value="3">Level 3 (recommended for experienced hikers)</option></b><br><br>
 
           <h4>Wildlife/Scenery (select all that apply): </h4>
-            <input type="checkbox" name="streams" value="1">
+            <input type="checkbox" name="streams" value="true">
             <label for="streams">Streams/Rivers</label>
 
-            <input type="checkbox" name="mountainViews" value="1">
+            <input type="checkbox" name="mountainViews" value="true">
             <label for="mountainViews">Mountain Views</label>
 
-            <input type="checkbox" name="meadows" value="1">
+            <input type="checkbox" name="meadows" value="true">
             <label for="meadows">Meadows</label>
 
-            <input type="checkbox" name="lakes" value="1">
+            <input type="checkbox" name="lakes" value="true">
             <label for="lakes">Lakes</label>
-            <input type="checkbox" name="waterfalls" value="1">
+            <input type="checkbox" name="waterfalls" value="true">
             <label for="waterfalls">Waterfalls</label>
 
             <input type="checkbox" name="summits" value="1">
             <label for="summits">Summit</label>
 
-            <input type="checkbox" name="dogs" value="1">
-            <label for="dogs">Dogs Allowed</label>
 
         <button type="submit" class="btn btn-info">Find Your Trail</button>
 
       </form>
+      @* @if(Model.Count != 0)
+      {
+        <h2>Exact Matches</h2>
+        <h4>The following trails match both your desired difficulty and desired features:</h4>
+        <ul>
+          @foreach (Trail trail in @Model["exactMatches"])
+          {
+            <li><a href="/trails/trail.GetId()">@trail.GetName()</a></li>
+          }
+        </ul>
+
+        <h2>Partial Matches</h2>
+
+        <h4>The following trails match your difficulty criteria and include one or more of your desired features:</h4>
+        <ul>
+          @foreach (Trail trail in @Model["partialMatches"])
+          {
+            <li><a href="/trails/trail.GetId()">@trail.GetName()</a></li>
+          }
+        </ul>
+      } *@
     </div>
   </div>
 
