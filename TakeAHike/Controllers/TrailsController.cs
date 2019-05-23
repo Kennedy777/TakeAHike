@@ -20,9 +20,9 @@ namespace TakeAHike.Controllers
     }
 
     [HttpPost("/trails/create")]
-    public ActionResult Create(string name, int difficulty, int summits, bool waterfalls, bool streams, bool mountainViews, bool meadows, bool lakes, bool dogs, int id)
+    public ActionResult Create(string name, int difficulty, int summits, bool waterfalls, bool streams, bool mountainViews, bool meadows, bool lakes, string location, int id)
     {
-      Trail newTrail = new Trail(name, difficulty, summits, waterfalls, streams, mountainViews, meadows, lakes, dogs);
+      Trail newTrail = new Trail(name, difficulty, summits, waterfalls, streams, mountainViews, meadows, lakes, location);
       newTrail.Save();
       Trail.GetAll();
       return View("Show", newTrail);
@@ -32,6 +32,17 @@ namespace TakeAHike.Controllers
     public ActionResult Find()
     {
       return View();
+    }
+
+    [HttpPost("/trails/results")]
+    public ActionResult Results(int difficulty, int summits, bool waterfalls, bool streams, bool mountainViews, bool meadows, bool lakes)
+    {
+      List<Trail> exactMatches = GetMatches(difficulty, summits, waterfalls, streams, mountainViews, meadows, lakes);
+      List<Trail> partialMatches = GetPartialMatches(difficulty, summits, waterfalls, streams, mountainViews, meadows, lakes);
+      Dictionary<string, object> model = new Dictionary<string, object>;
+      model.Add("partialMatches", partialMatches);
+      model.Add("exactMatches", exactMatches);
+
     }
   }
 }
