@@ -10,16 +10,9 @@
   <div class="container">
     <div class="box">
     <h2>Hike the @Model.GetName()</h2>
-    <br>
-    <h3>Trail Details: </h3>
-    <br>
+
     <h4>Location: @Model.GetLocation()</h4>
     <h4>Difficulty: Level @Model.GetDifficulty()</h4>
-    <h4>View Points: </h4>
-      @if(@Model.GetSummits() == 1)
-      {
-        <p>Theres only one summit</p>
-      }
       @if(@Model.GetSummits() == 2)
       {
         <p> There are two total view points</p>
@@ -31,6 +24,10 @@
       <h4>Features & Scenery of the @Model.GetName() hike: </h4>
 
       <ul>
+          @if(@Model.GetSummits() == 1)
+          {
+            <li>@Model.GetName() has a summit</li>
+          }
         @if(@Model.GetWaterfalls() == true)
         {
           <li>@Model.GetName() contains a beautiful waterfall</li>
