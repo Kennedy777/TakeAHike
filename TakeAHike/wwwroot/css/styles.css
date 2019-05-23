@@ -7,9 +7,26 @@ body {
   background-image: url("/img/trail2.jpeg");
   height: 100%;
   background-position: center;
-
   background-size: cover;
 
+}
+.panel-heading {
+  font-weight: bold;
+}
+
+.form-box {
+  background-color: lightgreen;
+  border: 10px solid green;
+  text-align: center;
+
+  position: fixed;
+  left:10%;
+  top: 15%;
+  right: 10%;
+  min-height: 10%;
+}
+.trail-panels {
+  margin-top: 15%;
 }
 
 .title-bar {
