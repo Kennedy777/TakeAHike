@@ -12,14 +12,13 @@
   <div class="form-box">
     <div class="form-group">
     <form action="/trails/find" method="post">
-        <b><label for="difficulty"><h3>Trail Difficulty: </h3></label>
+        <b><label for="difficulty"><h4>Trail Difficulty: </h4></label>
         <p>Factors such as elevation and trail quality increase difficulty.</p>
-        <input type="radio" name="difficulty" value="1">Level 1 (easy)</option>
-        <input type="radio" name="difficulty" value="2">Level 2 </option>
-        <input type="radio" name="difficulty" value="3">Level 3 (for experienced hikers)</option></b>
+        <input type="radio" name="difficulty" value="1">Level 1 (easy)</option><br>
+        <input type="radio" name="difficulty" value="2">Level 2 </option><br>
+        <input type="radio" name="difficulty" value="3">Level 3 (recommended for experienced hikers)</option></b><br><br>
 
-
-          <h3>Wildlife/Scenery (select all that apply): </h3>
+          <h4>Wildlife/Scenery (select all that apply): </h4>
             <input type="checkbox" name="streams" value="1">
             <label for="streams">Streams/Rivers</label>
 
@@ -28,7 +27,7 @@
 
             <input type="checkbox" name="meadows" value="1">
             <label for="meadows">Meadows</label>
-            <br>
+
             <input type="checkbox" name="lakes" value="1">
             <label for="lakes">Lakes</label>
             <input type="checkbox" name="waterfalls" value="1">
@@ -39,7 +38,6 @@
 
             <input type="checkbox" name="dogs" value="1">
             <label for="dogs">Dogs Allowed</label>
-            <br>
 
         <button type="submit" class="btn btn-info">Find Your Trail</button>
 
