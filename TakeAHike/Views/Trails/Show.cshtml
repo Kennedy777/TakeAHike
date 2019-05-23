@@ -5,6 +5,12 @@
 @using TakeAHike.Models;
 @using TakeAHike;
 <body>
+
+  @if (@Model.Count == 0)
+  {
+    <p>Sorry, no trails matched your search criteria. Please adjust your criteria and try again.</p>
+  }
+
   <h1>Take A Hike!</h1>
   <div class="container">
     <div class="box">
@@ -12,6 +18,7 @@
     <br>
     <h3>Trail Details: </h3>
     <br>
+    <h4>Location: @Model.GetLocation()</h4>
     <h4>Difficulty: Level @Model.GetDifficulty()</h4>
     <h4>View Points: </h4>
       @if(@Model.GetSummits() == 1)
@@ -25,11 +32,6 @@
       @if(@Model.GetSummits() == 3)
       {
         <p>There are three or more view points</p>
-      }
-    <h4>Dogs Allowed?</h4>
-      @if(@Model.GetDogs() == true)
-      {
-        <p>Yes @Model.GetName() is a dog friendly trail!</p>
       }
       @if(@Model.GetDogs() == false)
       {
